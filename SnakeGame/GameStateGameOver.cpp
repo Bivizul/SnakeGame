@@ -16,8 +16,10 @@ namespace SnakeGame
 		data.popup.setFillColor(sf::Color::Black);
 		data.popup.setOutlineThickness(6);
 		data.popup.setOutlineColor(sf::Color::White);
-		//data.shape.setOrigin(1.5f,0.5f);
 		data.popup.setOrigin(data.popup.getSize().x / 2, data.popup.getSize().y / 2);
+
+		data.buttonNav.rootButtons.children.push_back(&data.startGameButton);
+		data.buttonNav.rootButtons.children.push_back(&data.mainMenuButton);
 
 		//--------------------------------------------------
 
@@ -55,14 +57,44 @@ namespace SnakeGame
 
 		//std::string s = "Stasfasfasrt\ngamesfd";
 		//std::string s = "Начать\nигру";
-		std::string s = "Start\ngame";
+		std::string sg = "Start\ngame";
+		std::string mm = "Main\nmenu";
 		//std::wstring s = L"Начать\nигру";
 		//std::wstring s = L"Русский\ngamesfd";
 
 		//InitButton(data.startGameButton, data.font, L"Начать\nигру");
-		InitButton(data.startGameButton, data.font, s);
+		//InitButton(data.startGameButton, data.font, sg);
 		//InitButton(data.mainMenuButton, data.font, L"В главное\nменю");
-		InitButton(data.mainMenuButton, data.font, s);
+		//InitButton(data.mainMenuButton, data.font, mm);
+
+		
+		data.startGameButton.shape.setSize({ 200.f, 80.f });
+		data.startGameButton.shape.setFillColor(sf::Color::White);
+		data.startGameButton.shape.setOrigin(data.startGameButton.shape.getSize().x / 2, data.startGameButton.shape.getSize().y / 2);
+		data.startGameButton.shape.setOutlineColor(sf::Color::Cyan);
+		data.startGameButton.shape.setOutlineThickness(4.f);
+
+		data.startGameButton.text.setFont(data.font);
+		data.startGameButton.text.setCharacterSize(24);
+		data.startGameButton.text.setFillColor(sf::Color::Black);
+		data.startGameButton.text.setString(sg);
+		data.startGameButton.text.setOrigin(GetItemOrigin(data.startGameButton.text, { 0.0f, 0.5f }));
+		
+		data.mainMenuButton.shape.setSize({ 200.f, 80.f });
+		data.mainMenuButton.shape.setFillColor(sf::Color::White);
+		data.mainMenuButton.shape.setOrigin(data.mainMenuButton.shape.getSize().x / 2, data.mainMenuButton.shape.getSize().y / 2);
+		data.mainMenuButton.shape.setOutlineColor(sf::Color::Cyan);
+		data.mainMenuButton.shape.setOutlineThickness(4.f);
+
+		data.mainMenuButton.text.setFont(data.font);
+		data.mainMenuButton.text.setCharacterSize(24);
+		data.mainMenuButton.text.setFillColor(sf::Color::Black);
+		data.mainMenuButton.text.setString(mm);
+		data.mainMenuButton.text.setOrigin(GetItemOrigin(data.mainMenuButton.text, { 0.0f, 0.5f }));
+
+		InitButtonItem(data.buttonNav.rootButtons);
+		SelectButtonNavItem(data.buttonNav, &data.startGameButton);
+
 	}
 
 	void ShutdownGameStateGameOver(GameStateGameOverData& data, Game& game)
@@ -72,111 +104,56 @@ namespace SnakeGame
 
 	void HandleGameStateGameOverWindowEvent(GameStateGameOverData& data, Game& game, const sf::Event& event)
 	{
+		if (!data.buttonNav.selectedButton)
+		{
+			return;
+		}
+
 		if (event.type == sf::Event::KeyPressed)
 		{
 
-
-			if (event.key.code == sf::Keyboard::Space)
+			if (event.key.code == sf::Keyboard::Escape)
 			{
-				SwitchGameState(game, GameStateType::Playing);
+				//	TODO
 			}
-			else if (event.key.code == sf::Keyboard::Escape)
+			else if (event.key.code == sf::Keyboard::Enter)
 			{
-				SwitchGameState(game, GameStateType::MainMenu);
+				if (data.buttonNav.selectedButton == &data.startGameButton)
+				{
+					SwitchGameState(game, GameStateType::Playing);
+				}
+				else if (data.buttonNav.selectedButton == &data.mainMenuButton)
+				{
+					SwitchGameState(game, GameStateType::MainMenu);
+				}
+				else
+				{
+					//	TODO
+				}
+			}
+
+			Orientation orientation = data.buttonNav.selectedButton	->parent->childrenOrientation;
+			if (orientation == Orientation::Vertical && event.key.code == sf::Keyboard::W ||
+				orientation == Orientation::Horizontal && event.key.code == sf::Keyboard::A)
+			{
+				SelectPreviousButtonNavItem(data.buttonNav);
+			}
+			else if (orientation == Orientation::Vertical && event.key.code == sf::Keyboard::S ||
+				orientation == Orientation::Horizontal && event.key.code == sf::Keyboard::D)
+			{
+				SelectNextButtonNavItem(data.buttonNav);
 			}
 		}
 	}
 
-	//void SelectMenuItem(Menu& menu, MenuItem* item)
-	//{
-	//	// It is definitely error to select root item
-	//	assert(item != &menu.rootItem);
-
-	//	if (menu.selectedItem == item)
-	//	{
-	//		return;
-	//	}
-
-	//	if (item && !item->isEnabled)
-	//	{
-	//		// Don't allow to select disabled item
-	//		return;
-	//	}
-
-	//	if (menu.selectedItem)
-	//	{
-	//		menu.selectedItem->text.setFillColor(menu.selectedItem->deselectedColor);
-	//	}
-
-	//	menu.selectedItem = item;
-
-	//	if (menu.selectedItem)
-	//	{
-	//		menu.selectedItem->text.setFillColor(menu.selectedItem->selectedColor);
-	//	}
-	//}
-
-	//bool SelectPreviousMenuItem(Menu& menu)
-	//{
-	//	if (menu.selectedItem)
-	//	{
-	//		MenuItem* parent = menu.selectedItem->parent;
-	//		assert(parent); // There always should be parent
-
-	//		auto it = std::find(parent->children.begin(), parent->children.end(), menu.selectedItem);
-	//		if (it != parent->children.begin())
-	//		{
-	//			SelectMenuItem(menu, *(--it));
-	//			return true;
-	//		}
-	//	}
-
-	//	return false;
-	//}
-
-	//bool SelectNextMenuItem(Menu& menu)
-	//{
-	//	if (menu.selectedItem)
-	//	{
-	//		MenuItem* parent = menu.selectedItem->parent;
-	//		assert(parent); // There always should be parent
-	//		auto it = std::find(parent->children.begin(), parent->children.end(), menu.selectedItem);
-	//		if (it != parent->children.end() - 1)
-	//		{
-	//			SelectMenuItem(menu, *(++it));
-	//			return true;
-	//		}
-	//	}
-	//	return false;
-	//}
-
 	void UpdateGameStateGameOver(GameStateGameOverData& data, Game& game, float timeDelta)
 	{
-		//data.timeSinceGameOver += timeDelta;
-
-		/*sf::Color gameOverTextColor = (int)data.timeSinceGameOver % 2 ? sf::Color::Red : sf::Color::Yellow;
-		data.gameOverText.setFillColor(gameOverTextColor);*/
-
-		/*data.recordsTableText.setString("Records:");
-		for (const ProfileItem& item : game.recordsTable)
-		{
-			data.recordsTableText.setString(data.recordsTableText.getString() + "\n" + item.name + ": " + std::to_string(item.score));
-		}
-		data.recordsTableText.setOrigin(GetItemOrigin(data.recordsTableText, { 0.5f, 0.f }));*/
-
-
-
 		data.recordsText.setString("");
 		for (int i = 0; i < 6; ++i)
 		{
 			data.recordsText.setString(data.recordsText.getString() + "\n" + FormatTableScore(i, game.recordsTable[i].score));
 		}
 		data.recordsText.setOrigin(GetItemOrigin(data.recordsText, { 0.5f, 0.f }));
-
-		//-----------------------------------------------------
-
-		data.startGameButton.shape.setOutlineColor(data.selectButton == GameOverButton::StartGameButton ? sf::Color::Green : sf::Color::White);
-		data.mainMenuButton.shape.setOutlineColor(data.selectButton == GameOverButton::MainMenuButton ? sf::Color::Green : sf::Color::White);
 	}
 
 	void DrawGameStateGameOver(GameStateGameOverData& data, Game& game, sf::RenderWindow& window)
@@ -191,15 +168,6 @@ namespace SnakeGame
 
 		sf::Vector2f viewSize = (sf::Vector2f)data.popup.getSize();
 		sf::Vector2f viewPosition = (sf::Vector2f)data.popup.getPosition();
-
-		/*data.gameOverText.setPosition(viewSize.x / 2.f, viewSize.y / 2.f);
-		window.draw(data.gameOverText);
-
-		data.recordsTableText.setPosition(viewSize.x / 2.f, 30.f);
-		window.draw(data.recordsTableText);
-
-		data.hintText.setPosition(viewSize.x / 2.f, viewSize.y - 10.f);
-		window.draw(data.hintText);*/
 
 		data.titleScreenText.setPosition(viewPosition.x, viewPosition.y - (viewSize.y / 2) + 50);
 		window.draw(data.titleScreenText);

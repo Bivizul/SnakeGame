@@ -30,9 +30,10 @@ namespace SnakeGame
 		sf::Text recordsText;
 		//std::vector<ProfileItem> records;
 
-		GameOverButton selectButton;
-		Button startGameButton;
-		Button mainMenuButton;
+		//GameOverButton selectButton;
+		ButtonItem startGameButton;
+		ButtonItem mainMenuButton;
+		ButtonNav buttonNav;
 	};
 
 	// Returns pointer to the allocated data

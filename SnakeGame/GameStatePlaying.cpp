@@ -13,10 +13,8 @@ namespace SnakeGame
 		assert(data.grassTexture.loadFromFile(RESOURCES_PATH + "Grass.jpg"));
 
 		assert(data.snakeHeadTexture.loadFromFile(RESOURCES_PATH + "Snake_Head.png"));
-		//assert(data.snakeHeadTexture.loadFromFile(RESOURCES_PATH + "table-sprite.png",sf::IntRect(0,0,20,20)));
 		assert(data.snakeBodyTexture.loadFromFile(RESOURCES_PATH + "Snake_Body.png"));
-		//assert(data.appleTexture.loadFromFile(RESOURCES_PATH + "Apple.png"));
-		assert(data.appleTexture.loadFromFile(RESOURCES_PATH + "table-sprite.png", sf::IntRect(62 + (64 * 5), 34 + (64 * 20), 64, 64)));
+		assert(data.appleTexture.loadFromFile(RESOURCES_PATH + "table-sprite.png", sf::IntRect(62 + (64 * 20), 34 + (64 * 19), 64, 64)));
 		assert(data.wallTexture.loadFromFile(RESOURCES_PATH + "table-sprite.png", sf::IntRect(62 + (64 * 14), 34 + (64 * 37), 64, 64)));
 
 		//assert(data.appleEatBuffer.loadFromFile(RESOURCES_PATH + "AppleEat.wav"));

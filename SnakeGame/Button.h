@@ -1,17 +1,34 @@
 #pragma once
 #include "SFML/Graphics.hpp"
+#include "Math.h"
 
 namespace SnakeGame
 {
-	struct Button
+	struct ButtonItem
 	{
 		sf::Text text;
 		sf::RectangleShape shape;
+
+		Orientation childrenOrientation = Orientation::Vertical;
+
+		sf::Color selectedColor = sf::Color::Green;
+		sf::Color deselectedColor = sf::Color::White;
+
+		bool isEnabled = true;
+		std::vector<ButtonItem*> children;
+
+		ButtonItem* parent = nullptr;
 	};
 
-	void InitButton(Button& button, sf::Font& font, std::string& text);
-	//void InitButton(Button& button, sf::Font& font, std::wstring& text);
-	//void InitButton(Button& button, sf::Font& font, const wchar_t text[]);
+	struct ButtonNav
+	{
+		ButtonItem rootButtons;
+		ButtonItem* selectedButton = nullptr;
+	};
 
-	void DrawButton(Button& button, float x, float y, sf::RenderWindow& window);
+	void InitButtonItem(ButtonItem& button);
+	void SelectButtonNavItem(ButtonNav& buttonNav, ButtonItem* item);
+	bool SelectPreviousButtonNavItem(ButtonNav& buttonNav);
+	bool SelectNextButtonNavItem(ButtonNav& buttonNav);
+	void DrawButton(ButtonItem& button, float x, float y, sf::RenderWindow& window);
 }

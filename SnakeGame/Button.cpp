@@ -1,34 +1,88 @@
 #include "Button.h"
 #include "Math.h"
+#include <cassert>
 #include <iostream>
 
 namespace SnakeGame
 {
-	void InitButton(Button& button, sf::Font& font, std::string& text)
-	//void InitButton(Button& button, sf::Font& font, std::wstring& text)
-	//void InitButton(Button& button, sf::Font& font, const wchar_t text[])
+	void InitButtonItem(ButtonItem& button)
 	{
-		button.shape.setSize({ 200.f, 80.f });
-		button.shape.setFillColor(sf::Color::White);
-		//button.shape.setOrigin({ 0.5f, 0.5f });
-		button.shape.setOrigin(button.shape.getSize().x / 2, button.shape.getSize().y / 2);
-		button.shape.setOutlineColor(sf::Color::Cyan);
-		button.shape.setOutlineThickness(4.f);
-
-		button.text.setFont(font);
-		button.text.setCharacterSize(24);
-		button.text.setFillColor(sf::Color::Red);
-		button.text.setString(text);
-		button.text.setOrigin(GetItemOrigin(button.text, { 0.0f, 0.5f }));
+		for (auto& child : button.children)
+		{
+			child->parent = &button;
+			InitButtonItem(*child);
+		}
 	}
 
-	void DrawButton(Button& button, float x, float y, sf::RenderWindow& window)
+	void SelectButtonNavItem(ButtonNav& buttonNav, ButtonItem* item)
+	{
+		// It is definitely error to select root item
+		assert(item != &buttonNav.rootButtons);
+
+		if (buttonNav.selectedButton == item)
+		{
+			return;
+		}
+
+		if (item && !item->isEnabled)
+		{
+			// Don't allow to select disabled item
+			return;
+		}
+
+		if (buttonNav.selectedButton)
+		{
+			buttonNav.selectedButton->shape.setOutlineColor(buttonNav.selectedButton->deselectedColor);
+		}
+
+		buttonNav.selectedButton = item;
+
+		if (buttonNav.selectedButton)
+		{
+			buttonNav.selectedButton->shape.setOutlineColor(buttonNav.selectedButton->selectedColor);
+		}
+	}
+
+	bool SelectPreviousButtonNavItem(ButtonNav& buttonNav)
+	{
+		if (buttonNav.selectedButton)
+		{
+			ButtonItem* parent = buttonNav.selectedButton->parent;
+			assert(parent); // There always should be parent
+
+			auto it = std::find(parent->children.begin(), parent->children.end(), buttonNav.selectedButton);
+			if (it != parent->children.begin())
+			{
+				SelectButtonNavItem(buttonNav, *(--it));
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	bool SelectNextButtonNavItem(ButtonNav& buttonNav)
+	{
+		if (buttonNav.selectedButton)
+		{
+			ButtonItem* parent = buttonNav.selectedButton->parent;
+			assert(parent); // There always should be parent
+			auto it = std::find(parent->children.begin(), parent->children.end(), buttonNav.selectedButton);
+			if (it != parent->children.end() - 1)
+			{
+				SelectButtonNavItem(buttonNav, *(++it));
+				return true;
+			}
+		}
+		return false;
+	}
+
+	void DrawButton(ButtonItem& button, float x, float y, sf::RenderWindow& window)
 	{
 		button.shape.setPosition(x, y);
 		window.draw(button.shape);
 
 		button.text.setPosition(x, y);
 		CenterText(button.text, window);
-		//window.draw(button.text);
 	}
 }

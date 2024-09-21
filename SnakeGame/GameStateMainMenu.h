@@ -15,8 +15,6 @@ namespace SnakeGame
 		MenuItem startGameItem;
 
 		MenuItem optionsItem;
-		//MenuItem optionsInfiniteApplesItem;	// remove
-		//MenuItem optionsWithAccelerationItem;	// remove
 		MenuItem optionsVeryEasyItem;
 		MenuItem optionsEasyItem;
 		MenuItem optionsNormalItem;

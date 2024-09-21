@@ -15,7 +15,6 @@ namespace SnakeGame
 		data.popup.setFillColor(sf::Color::Black);
 		data.popup.setOutlineThickness(6);
 		data.popup.setOutlineColor(sf::Color::White);
-		//data.shape.setOrigin(1.5f,0.5f);
 		data.popup.setOrigin(data.popup.getSize().x / 2, data.popup.getSize().y / 2);
 
 		//--------------------------------------------------
@@ -43,9 +42,6 @@ namespace SnakeGame
 		data.optionsItem.text.setFont(data.font);
 		data.optionsItem.text.setCharacterSize(24);
 		data.optionsItem.hintText.setString(L"Уровень\nсложности");
-		//data.optionsItem.hintText.setStyle(sf::Text::Bold);
-		//data.optionsItem.hintText.setOutlineThickness(1);
-		//data.optionsItem.hintText.setOutlineColor(sf::Color::Cyan);
 		data.optionsItem.hintText.setFont(data.font);
 		data.optionsItem.hintText.setCharacterSize(48);
 		data.optionsItem.hintText.setFillColor(sf::Color::White);
@@ -194,31 +190,26 @@ namespace SnakeGame
 				}
 				else if (data.menu.selectedItem == &data.optionsVeryEasyItem)
 				{
-					//game.options = (GameOptions)((std::uint8_t)game.options ^ (std::uint8_t)GameOptions::VeryEasy);
 					game.options = GameOptions::VeryEasy;
 					SwitchGameState(game, GameStateType::Playing);
 				}
 				else if (data.menu.selectedItem == &data.optionsEasyItem)
 				{
-					//game.options = (GameOptions)((std::uint8_t)game.options ^ (std::uint8_t)GameOptions::Easy);
 					game.options = GameOptions::Easy;
 					SwitchGameState(game, GameStateType::Playing);
 				}
 				else if (data.menu.selectedItem == &data.optionsNormalItem)
 				{
-					//game.options = (GameOptions)((std::uint8_t)game.options ^ (std::uint8_t)GameOptions::Normal);
 					game.options = GameOptions::Normal;
 					SwitchGameState(game, GameStateType::Playing);
 				}
 				else if (data.menu.selectedItem == &data.optionsHardItem)
 				{
-					//game.options = (GameOptions)((std::uint8_t)game.options ^ (std::uint8_t)GameOptions::Hard);
 					game.options = GameOptions::Hard;
 					SwitchGameState(game, GameStateType::Playing);
 				}
 				else if (data.menu.selectedItem == &data.optionsVeryHardItem)
 				{
-					//game.options = (GameOptions)((std::uint8_t)game.options ^ (std::uint8_t)GameOptions::VeryHard);
 					game.options = GameOptions::VeryHard;
 					SwitchGameState(game, GameStateType::Playing);
 				}
@@ -257,13 +248,13 @@ namespace SnakeGame
 			}
 
 			Orientation orientation = data.menu.selectedItem->parent->childrenOrientation;
-			if (orientation == Orientation::Vertical && event.key.code == sf::Keyboard::Up ||
-				orientation == Orientation::Horizontal && event.key.code == sf::Keyboard::Left)
+			if (orientation == Orientation::Vertical && event.key.code == sf::Keyboard::W ||
+				orientation == Orientation::Horizontal && event.key.code == sf::Keyboard::A)
 			{
 				SelectPreviousMenuItem(data.menu);
 			}
-			else if (orientation == Orientation::Vertical && event.key.code == sf::Keyboard::Down ||
-				orientation == Orientation::Horizontal && event.key.code == sf::Keyboard::Right)
+			else if (orientation == Orientation::Vertical && event.key.code == sf::Keyboard::S ||
+				orientation == Orientation::Horizontal && event.key.code == sf::Keyboard::D)
 			{
 				SelectNextMenuItem(data.menu);
 			}
@@ -272,20 +263,6 @@ namespace SnakeGame
 
 	void UpdateGameStateMainMenu(GameStateMainMenuData& data, Game& game, float timeDelta)
 	{
-		/*bool isVeryEasy = ((std::uint8_t)game.options & (std::uint8_t)GameOptions::VeryEasy) != (std::uint8_t)GameOptions::Empty;
-		bool isEasy = ((std::uint8_t)game.options & (std::uint8_t)GameOptions::Easy) != (std::uint8_t)GameOptions::Empty;
-		bool isNormal = ((std::uint8_t)game.options & (std::uint8_t)GameOptions::Normal) != (std::uint8_t)GameOptions::Empty;
-		bool isHard = ((std::uint8_t)game.options & (std::uint8_t)GameOptions::Hard) != (std::uint8_t)GameOptions::Empty;
-		bool isVeryHard = ((std::uint8_t)game.options & (std::uint8_t)GameOptions::VeryHard) != (std::uint8_t)GameOptions::Empty;
-
-		std::cout << isVeryEasy << " " << isEasy << " " << isNormal << " " << isHard << " " << isVeryHard << std::endl;*/
-
-		//data.optionsVeryEasyItem.text.setFillColor(game.options == GameOptions::VeryEasy ? sf::Color::Green : sf::Color::White);
-		//data.optionsEasyItem.text.setFillColor(game.options == GameOptions::Easy ? sf::Color::Green : sf::Color::White);
-		//data.optionsNormalItem.text.setFillColor(game.options == GameOptions::Normal ? sf::Color::Green : sf::Color::White);
-		//data.optionsHardItem.text.setFillColor(game.options == GameOptions::Hard ? sf::Color::Green : sf::Color::White);
-		//data.optionsVeryHardItem.text.setFillColor(game.options == GameOptions::VeryHard ? sf::Color::Green : sf::Color::White);
-
 		bool isSoundEnabled = ((std::uint8_t)game.settings & (std::uint8_t)GameSettings::SoundEnabled) != (std::uint8_t)GameSettings::Empty;
 		bool isMusicEnabled = ((std::uint8_t)game.settings & (std::uint8_t)GameSettings::MusicEnabled) != (std::uint8_t)GameSettings::Empty;
 
@@ -302,8 +279,6 @@ namespace SnakeGame
 
 		sf::Vector2f viewSize = (sf::Vector2f)data.popup.getSize();
 		sf::Vector2f viewPosition = (sf::Vector2f)data.popup.getPosition();
-
-		//std::cout<< viewPosition.x << " "<< viewPosition.y << std::endl;
 
 		sf::Text* hintText = &GetCurrentMenuContext(data.menu)->hintText;
 		hintText->setOrigin(GetItemOrigin(*hintText, { 0.5f, 0.f }));
