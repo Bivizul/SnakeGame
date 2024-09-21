@@ -11,7 +11,7 @@ namespace SnakeGame
 		// Init player state
 		player.position.x = (float)SCREEN_WIDTH / 2.f;
 		player.position.y = (float)SCREEN_HEIGHT / 2.f;
-		player.speed = INITIAL_SPEED;
+
 		player.direction = PlayerDirection::Right;
 
 		// Init sprite
@@ -70,6 +70,11 @@ namespace SnakeGame
 
 			// —брасываем счетчик времени после перемещени€
 			player.timeSinceLastMove = 0.f;
+
+			player.segmentsPositions.clear();
+			for (const auto& segment : player.segments) {
+				player.segmentsPositions.push_back(segment.position);
+			}
 		}
 	}
 
@@ -86,6 +91,23 @@ namespace SnakeGame
 	bool HasPlayerCollisionWithScreenBorder(const Player& player)
 	{
 		return !IsPointInRect(player.position, { WALL_SIZE + PLAYER_SIZE / 2,INFO_HEIGHT + WALL_SIZE + PLAYER_SIZE / 2 }, { (float)SCREEN_WIDTH - WALL_SIZE - PLAYER_SIZE / 2, (float)SCREEN_HEIGHT - WALL_SIZE - PLAYER_SIZE / 2 });
+	}
+
+	bool HasPlayerCollisionWithBody(const Player& player)
+	{
+		if (player.segments.size() > 4)
+		{
+			for (auto& position : player.segmentsPositions)
+			{
+				std::cout << "player.position.x " << player.position.x << " player.position.y " << player.position.x << std::endl;
+				std::cout << "position.x " << position.x << " position.y " << position.x << std::endl;
+				if (position.x == player.position.x || position.y == player.position.y)
+				{
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	void DrawPlayer(Player& player, sf::RenderWindow& window)

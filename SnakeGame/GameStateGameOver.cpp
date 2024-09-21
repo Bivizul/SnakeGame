@@ -71,7 +71,7 @@ namespace SnakeGame
 		data.startGameButton.shape.setSize({ 200.f, 80.f });
 		data.startGameButton.shape.setFillColor(sf::Color::White);
 		data.startGameButton.shape.setOrigin(data.startGameButton.shape.getSize().x / 2, data.startGameButton.shape.getSize().y / 2);
-		data.startGameButton.shape.setOutlineColor(sf::Color::Cyan);
+		data.startGameButton.shape.setOutlineColor(sf::Color::White);
 		data.startGameButton.shape.setOutlineThickness(4.f);
 
 		data.startGameButton.text.setFont(data.font);
@@ -83,7 +83,7 @@ namespace SnakeGame
 		data.mainMenuButton.shape.setSize({ 200.f, 80.f });
 		data.mainMenuButton.shape.setFillColor(sf::Color::White);
 		data.mainMenuButton.shape.setOrigin(data.mainMenuButton.shape.getSize().x / 2, data.mainMenuButton.shape.getSize().y / 2);
-		data.mainMenuButton.shape.setOutlineColor(sf::Color::Cyan);
+		data.mainMenuButton.shape.setOutlineColor(sf::Color::White);
 		data.mainMenuButton.shape.setOutlineThickness(4.f);
 
 		data.mainMenuButton.text.setFont(data.font);

@@ -53,4 +53,5 @@ namespace SnakeGame
 	std::vector<std::string> SplitString(const std::string& str, char delimiter);
 	void CenterText(sf::Text& text, sf::RenderWindow& window);
 	std::string ReplaceNewlines(const std::string& input);
+	bool IsPositionProhibited(float x, float y, const std::vector<Position>& prohibitedPositions);
 }

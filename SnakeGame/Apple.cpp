@@ -20,7 +20,6 @@ namespace SnakeGame
 		}
 
 		apple.sprite.setPosition(OurVectorToSf(apple.position));
-		//apple.sprite.setPosition(0.f,0.f);
 		window.draw(apple.sprite);
 	}
 
@@ -29,10 +28,17 @@ namespace SnakeGame
 		apple.isEaten = true;
 	}
 
-	void ResetAppleState(Apple& apple)
+	void ResetAppleState(Apple& apple, std::vector<Position> prohibitedPositions)
 	{
-		apple.position.x = (float)(rand() % SCREEN_WIDTH);
-		apple.position.y = (float)(rand() % SCREEN_HEIGHT);
+		float newX, newY;
+		do {
+			newX = WALL_SIZE + ((float)(rand() % (SCREEN_WIDTH - ((int)WALL_SIZE * 2) + 1)));
+			newY = INFO_HEIGHT + WALL_SIZE + ((float)(rand() % (SCREEN_HEIGHT - (int)WALL_SIZE - INFO_HEIGHT + 1)));
+		} while (IsPositionProhibited(newX, newY, prohibitedPositions));
+
+		// Присваиваем новые координаты яблоку
+		apple.position.x = newX;
+		apple.position.y = newY;
 		apple.isEaten = false;
 	}
 

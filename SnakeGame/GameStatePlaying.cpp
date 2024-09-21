@@ -26,6 +26,37 @@ namespace SnakeGame
 		// Init player
 		InitPlayer(data.player, data.snakeHeadTexture);
 
+		switch (game.options)
+		{
+		case GameOptions::VeryEasy:
+		{
+			data.player.speed = INITIAL_SPEED_VERY_EASY;
+			break;
+		}
+		case GameOptions::Easy:
+		{
+			data.player.speed = INITIAL_SPEED_EASY;
+			break;
+		}
+		case GameOptions::Normal:
+		{
+			data.player.speed = INITIAL_SPEED_NORMAL;
+			break;
+		}
+		case GameOptions::Hard:
+		{
+			data.player.speed = INITIAL_SPEED_HARD;
+			break;
+		}
+		case GameOptions::VeryHard:
+		{
+			data.player.speed = INITIAL_SPEED_VERY_HARD;
+			break;
+		}
+		default:
+			break;
+		}
+
 		// Init apples
 		data.apples.clear();
 		ClearApplesGrid(data.applesGrid);
@@ -34,13 +65,14 @@ namespace SnakeGame
 		for (Apple& apple : data.apples)
 		{
 			InitApple(apple, data.appleTexture);
-			ResetAppleState(apple);
+			//ResetAppleState(apple, data.player.segments);
+			ResetAppleState(apple, {});
 			AddAppleToGrid(data.applesGrid, apple);
 		}
 
 		// Init walls
 		data.walls.clear();
-		int numwalls = SCREEN_WIDTH/WALL_SIZE;
+		int numwalls = SCREEN_WIDTH / WALL_SIZE;
 		data.walls.resize(numwalls);
 		//for (Wall& wall : data.walls)
 		////for (int x = 0; x < data.walls.size(); x += WALL_SIZE)
@@ -51,7 +83,7 @@ namespace SnakeGame
 
 		InitWalls(data.walls, data.wallTexture);
 
-		std::cout << data.walls.size() << std::endl;
+		//std::cout << data.walls.size() << std::endl;
 
 		data.numEatenApples = 0;
 
@@ -124,9 +156,11 @@ namespace SnakeGame
 			{
 				/*if ((std::uint8_t)game.options & (std::uint8_t)GameOptions::InfiniteApples)
 				{*/
-					// Move apple to a new random position
-					ResetAppleState(*collidingApples[i]);
-					AddAppleToGrid(data.applesGrid, *collidingApples[i]);
+				// Move apple to a new random position
+
+				ResetAppleState(*collidingApples[i], data.player.segmentsPositions);
+
+				AddAppleToGrid(data.applesGrid, *collidingApples[i]);
 				//}
 				//else
 				//{
@@ -136,33 +170,64 @@ namespace SnakeGame
 				//}
 
 				// Increase eaten apples counter
-				data.numEatenApples++;
+
+				switch (game.options)
+				{
+				case GameOptions::VeryEasy:
+				{
+					data.numEatenApples += 2;
+					break;
+				}
+				case GameOptions::Easy:
+				{
+					data.numEatenApples += 4;
+					break;
+				}
+				case GameOptions::Normal:
+				{
+					data.numEatenApples += 6;
+					break;
+				}
+				case GameOptions::Hard:
+				{
+					data.numEatenApples += 8;
+					break;
+				}
+				case GameOptions::VeryHard:
+				{
+					data.numEatenApples += 10;
+					break;
+				}
+				default:
+					break;
+				}
+
+
 				// Increase player speed
 				//if ((std::uint8_t)game.options & (std::uint8_t)GameOptions::WithAcceleration)
 				//{
-					data.player.speed += ACCELERATION;
+					//data.player.speed -= ACCELERATION_VERY_HARD;
 				//}
 				data.appleEatSound.play();
 
 				Grow(data.player, data.snakeBodyTexture);
 
-				std::cout<<data.player.segments.size()<<std::endl;
+				std::cout << data.player.segments.size() << std::endl;
 			}
 		}
 
-		bool isGameFinished = (data.numEatenApples == data.apples.size());
-			//&& !((std::uint8_t)game.options & (std::uint8_t)GameOptions::InfiniteApples);
+		//&& !((std::uint8_t)game.options & (std::uint8_t)GameOptions::InfiniteApples);
 
-		/*for (Wall& wall : data.walls)
+	/*for (Wall& wall : data.walls)
+	{
+		if (FindPlayerCollisionWithWall(data.player.position, wall.position))
 		{
-			if (FindPlayerCollisionWithWall(data.player.position, wall.position))
-			{
-				SetGameOverState(data, game);
-			}
-		}*/
+			SetGameOverState(data, game);
+		}
+	}*/
 
-		// Check collision with screen border
-		if (isGameFinished || HasPlayerCollisionWithScreenBorder(data.player))
+	// Check collision with screen border
+		if (HasPlayerCollisionWithScreenBorder(data.player) || HasPlayerCollisionWithBody(data.player))
 		{
 			SetGameOverState(data, game);
 		}
@@ -212,7 +277,7 @@ namespace SnakeGame
 		{
 			DrawWall(wall, window);
 		}
-																						        
+
 		sf::Vector2f viewSize = window.getView().getSize();
 		data.scoreText.setPosition(40.f, 5.f);
 		window.draw(data.scoreText);

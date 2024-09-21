@@ -18,9 +18,9 @@ namespace SnakeGame
 	};
 
 	void InitApple(Apple& apple, const sf::Texture& texture);
-	void ResetAppleState(Apple& apple);
 	void DrawApple(Apple& apple, sf::RenderWindow& window);
 	void MarkAppleAsEaten(Apple& apple);
+	void ResetAppleState(Apple& apple, std::vector<Position> prohibitedPositions);
 
 	struct ApplesGridCell
 	{

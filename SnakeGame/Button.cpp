@@ -1,7 +1,6 @@
 #include "Button.h"
 #include "Math.h"
 #include <cassert>
-#include <iostream>
 
 namespace SnakeGame
 {

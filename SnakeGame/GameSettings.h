@@ -11,8 +11,11 @@ namespace SnakeGame
 	const float APPLE_SIZE = 40.f;
 	const float WALL_SIZE = 40.f;
 
-	const float INITIAL_SPEED = 0.2f;
-	const float ACCELERATION = 0.f; // For each eaten apple player speed will be increased by this value
+	const float INITIAL_SPEED_VERY_EASY = 0.2f;
+	const float INITIAL_SPEED_EASY = 0.16f;
+	const float INITIAL_SPEED_NORMAL = 0.14f;
+	const float INITIAL_SPEED_HARD = 0.12f;
+	const float INITIAL_SPEED_VERY_HARD = 0.1f;
 
 	const int MIN_APPLES = 1;
 	const int MAX_APPLES = 2;

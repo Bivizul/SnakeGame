@@ -254,7 +254,7 @@ namespace SnakeGame
 			//	window.draw(text);
 			//}
 
-		std::cout << "text.getString().toAnsiString() " << text.getString().toAnsiString() << std::endl;
+		//std::cout << "text.getString().toAnsiString() " << text.getString().toAnsiString() << std::endl;
 
 		// Разделяем текст на строки по '\n'
 		std::vector<std::string> lines = SplitString(text.getString(), '\n');
@@ -295,6 +295,16 @@ namespace SnakeGame
 			pos += 9; // Длина "[NEWLINE]"
 		}
 		return result;
+	}
+
+
+	bool IsPositionProhibited(float x, float y, const std::vector<Position>& prohibitedPositions) {
+		for (const auto& pos : prohibitedPositions) {
+			if (std::abs(x - pos.x) <= 40.f && std::abs(y - pos.y) <= 40.f) {
+				return true; // Если попадаем в запрещенную зону
+			}
+		}
+		return false;
 	}
 
 }
