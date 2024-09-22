@@ -16,6 +16,7 @@ namespace SnakeGame
 		assert(data.snakeBodyTexture.loadFromFile(RESOURCES_PATH + "Snake_Body.png"));
 		assert(data.appleTexture.loadFromFile(RESOURCES_PATH + "table-sprite.png", sf::IntRect(62 + (64 * 20), 34 + (64 * 19), 64, 64)));
 		assert(data.wallTexture.loadFromFile(RESOURCES_PATH + "table-sprite.png", sf::IntRect(62 + (64 * 14), 34 + (64 * 37), 64, 64)));
+		assert(data.cupTexture.loadFromFile(RESOURCES_PATH + "table-sprite.png", sf::IntRect(62 + (64 * 4), 34 + (64 * 23), 64, 64)));
 
 		//assert(data.appleEatBuffer.loadFromFile(RESOURCES_PATH + "AppleEat.wav"));
 		//assert(data.deathBuffer.loadFromFile(RESOURCES_PATH + "Death.wav"));
@@ -57,6 +58,9 @@ namespace SnakeGame
 			break;
 		}
 
+		data.grassSprite.setTexture(data.grassTexture);
+		data.grassSprite.setScale(GetSpriteScale(data.grassSprite, { SCREEN_WIDTH, SCREEN_HEIGHT }));
+
 		// Init apples
 		data.apples.clear();
 		ClearApplesGrid(data.applesGrid);
@@ -86,12 +90,8 @@ namespace SnakeGame
 		//std::cout << data.walls.size() << std::endl;
 
 		data.numEatenApples = 0;
+		data.playerScore = 0;
 
-		data.scoreText.setFont(data.font);
-		data.scoreText.setCharacterSize(24);
-		data.scoreText.setFillColor(sf::Color::White);
-		data.scoreText.setString("0");
-		data.scoreText.setOrigin(GetItemOrigin(data.scoreText, { 0.f, 0.f }));
 
 		/*data.inputHintText.setFont(data.font);
 		data.inputHintText.setCharacterSize(24);
@@ -99,14 +99,34 @@ namespace SnakeGame
 		data.inputHintText.setString("Use arrow keys to move, ESC to exit");
 		data.inputHintText.setOrigin(GetItemOrigin(data.inputHintText, { 0.f, 0.f }));*/
 
-		data.playingFieldBackground.setFillColor(sf::Color(87, 137, 51));
 		data.infoBackground.setFillColor(sf::Color(75, 115, 46));
+
 		data.scoreApple.sprite.setTexture(data.appleTexture);
-		data.scoreApple.sprite.setOrigin(GetItemOrigin(data.scoreApple.sprite, { 0.f, 0.f })); // We need to use texture as origin ignores scale
+		data.scoreApple.sprite.setOrigin(GetItemOrigin(data.scoreApple.sprite, { 0.5f, 0.5f }));
 		data.scoreApple.sprite.setScale(GetSpriteScale(data.scoreApple.sprite, { APPLE_SIZE, APPLE_SIZE }));
 
-		data.grassSprite.setTexture(data.grassTexture);
-		data.grassSprite.setScale(GetSpriteScale(data.grassSprite, { SCREEN_WIDTH, SCREEN_HEIGHT }));
+		data.currentScoreText.setFont(data.font);
+		data.currentScoreText.setCharacterSize(24);
+		data.currentScoreText.setFillColor(sf::Color::White);
+		data.currentScoreText.setString("0");
+		data.currentScoreText.setOrigin(GetItemOrigin(data.currentScoreText, { 0.5f, 0.5f }));
+
+		data.cupSprite.setTexture(data.cupTexture);
+		data.cupSprite.setOrigin(GetItemOrigin(data.cupSprite, { 0.5f, 0.5f }));
+		data.cupSprite.setScale(GetSpriteScale(data.cupSprite, { CUP_SIZE, CUP_SIZE }));
+
+		data.maxScoreText.setFont(data.font);
+		data.maxScoreText.setCharacterSize(24);
+		data.maxScoreText.setFillColor(sf::Color::White);
+		data.maxScoreText.setString(std::to_string(game.profile.maxScore));
+		data.maxScoreText.setOrigin(GetItemOrigin(data.maxScoreText, { 0.5f, 0.5f }));
+
+
+		std::cout << "game.profile.maxScore " << game.profile.maxScore << std::endl;
+		for (ProfileItem& item : game.recordsTable)
+		{
+			std::cout << item.name << " item.maxScore " << item.maxScore << std::endl;
+		}
 	}
 
 	void ShutdownGameStatePlaying(GameStatePlayingData& data, Game& game)
@@ -159,7 +179,6 @@ namespace SnakeGame
 				// Move apple to a new random position
 
 				ResetAppleState(*collidingApples[i], data.player.segmentsPositions);
-
 				AddAppleToGrid(data.applesGrid, *collidingApples[i]);
 				//}
 				//else
@@ -170,32 +189,33 @@ namespace SnakeGame
 				//}
 
 				// Increase eaten apples counter
+				data.numEatenApples++;
 
 				switch (game.options)
 				{
 				case GameOptions::VeryEasy:
 				{
-					data.numEatenApples += 2;
+					data.playerScore = data.numEatenApples * 2;
 					break;
 				}
 				case GameOptions::Easy:
 				{
-					data.numEatenApples += 4;
+					data.playerScore = data.numEatenApples * 4;
 					break;
 				}
 				case GameOptions::Normal:
 				{
-					data.numEatenApples += 6;
+					data.playerScore = data.numEatenApples * 6;
 					break;
 				}
 				case GameOptions::Hard:
 				{
-					data.numEatenApples += 8;
+					data.playerScore = data.numEatenApples * 8;
 					break;
 				}
 				case GameOptions::VeryHard:
 				{
-					data.numEatenApples += 10;
+					data.playerScore = data.numEatenApples * 10;
 					break;
 				}
 				default:
@@ -226,13 +246,12 @@ namespace SnakeGame
 		}
 	}*/
 
-	// Check collision with screen border
 		if (HasPlayerCollisionWithScreenBorder(data.player) || HasPlayerCollisionWithBody(data.player))
 		{
 			SetGameOverState(data, game);
 		}
 
-		data.scoreText.setString(std::to_string(data.numEatenApples));
+		data.currentScoreText.setString(std::to_string(data.playerScore));
 	}
 
 	void SetGameOverState(GameStatePlayingData& data, Game& game)
@@ -243,8 +262,13 @@ namespace SnakeGame
 		{
 			if (item.name == game.profile.name)
 			{
-				item.score = data.numEatenApples;
-				game.profile.score = data.numEatenApples;
+				item.currentScore = data.playerScore;
+				game.profile.currentScore = data.playerScore;
+				if (data.playerScore > game.profile.maxScore)
+				{
+					item.maxScore = data.playerScore;
+					game.profile.maxScore = data.playerScore;
+				}
 				break;
 			}
 		}
@@ -257,10 +281,6 @@ namespace SnakeGame
 
 	void DrawGameStatePlaying(GameStatePlayingData& data, Game& game, sf::RenderWindow& window)
 	{
-
-		data.playingFieldBackground.setSize({ SCREEN_WIDTH, SCREEN_HEIGHT });
-		window.draw(data.playingFieldBackground);
-
 		window.draw(data.grassSprite);
 
 		data.infoBackground.setSize({ SCREEN_WIDTH,INFO_HEIGHT });
@@ -279,11 +299,17 @@ namespace SnakeGame
 		}
 
 		sf::Vector2f viewSize = window.getView().getSize();
-		data.scoreText.setPosition(40.f, 5.f);
-		window.draw(data.scoreText);
-		/*data.inputHintText.setPosition(viewSize.x - 10.f, 10.f);
-		window.draw(data.inputHintText);*/
-		data.scoreApple.sprite.setPosition(OurVectorToSf({ 10.f,10.f }));
+
+		data.scoreApple.sprite.setPosition(OurVectorToSf({ 40.f,  40.f }));
 		window.draw(data.scoreApple.sprite);
+
+		data.currentScoreText.setPosition(data.scoreApple.sprite.getPosition().x + 40.f, data.scoreApple.sprite.getPosition().y);
+		window.draw(data.currentScoreText);
+
+		data.cupSprite.setPosition(OurVectorToSf({ data.currentScoreText.getPosition().x + 100.f, data.currentScoreText.getPosition().y}));
+		window.draw(data.cupSprite);
+
+		data.maxScoreText.setPosition(data.cupSprite.getPosition().x + 40.f, data.cupSprite.getPosition().y);
+		window.draw(data.maxScoreText);
 	}
 }

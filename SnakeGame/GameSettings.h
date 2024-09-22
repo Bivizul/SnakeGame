@@ -10,6 +10,7 @@ namespace SnakeGame
 	const float PLAYER_SIZE = 40.f;
 	const float APPLE_SIZE = 40.f;
 	const float WALL_SIZE = 40.f;
+	const float CUP_SIZE = 40.f;
 
 	const float INITIAL_SPEED_VERY_EASY = 0.2f;
 	const float INITIAL_SPEED_EASY = 0.16f;

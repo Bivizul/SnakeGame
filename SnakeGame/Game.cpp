@@ -10,12 +10,12 @@ namespace SnakeGame
 {
 	bool operator<(const ProfileItem& lhs, const ProfileItem& rhs)
 	{
-		return lhs.score > rhs.score;
+		return lhs.maxScore > rhs.maxScore;
 	}
 
 	void InitGame(Game& game)
 	{
-		game.profile = { "XYZ", 0 };
+		game.profile = { "XYZ", 0 , 0};
 
 		// Generate fake records table
 		game.recordsTable[0] = { "John", 1000000 };

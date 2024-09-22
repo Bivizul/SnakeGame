@@ -33,7 +33,7 @@ namespace SnakeGame
 		float newX, newY;
 		do {
 			newX = WALL_SIZE + ((float)(rand() % (SCREEN_WIDTH - ((int)WALL_SIZE * 2) + 1)));
-			newY = INFO_HEIGHT + WALL_SIZE + ((float)(rand() % (SCREEN_HEIGHT - (int)WALL_SIZE - INFO_HEIGHT + 1)));
+			newY = INFO_HEIGHT + WALL_SIZE + ((float)(rand() % (SCREEN_HEIGHT - ((int)WALL_SIZE * 2) - INFO_HEIGHT + 1)));
 		} while (IsPositionProhibited(newX, newY, prohibitedPositions));
 
 		// Присваиваем новые координаты яблоку

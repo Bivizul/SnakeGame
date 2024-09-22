@@ -95,13 +95,13 @@ namespace SnakeGame
 
 	bool HasPlayerCollisionWithBody(const Player& player)
 	{
-		if (player.segments.size() > 4)
+		if (player.segments.size() > 2)
 		{
-			for (auto& position : player.segmentsPositions)
+			const auto& headPosition = player.segments.front().sprite.getPosition();
+			for (size_t i = 1; i < player.segments.size(); ++i)
 			{
-				std::cout << "player.position.x " << player.position.x << " player.position.y " << player.position.x << std::endl;
-				std::cout << "position.x " << position.x << " position.y " << position.x << std::endl;
-				if (position.x == player.position.x || position.y == player.position.y)
+				const auto& bodySegmentPosition = player.segments[i].sprite.getPosition();
+				if (headPosition.x == bodySegmentPosition.x && headPosition.y == bodySegmentPosition.y)
 				{
 					return true;
 				}

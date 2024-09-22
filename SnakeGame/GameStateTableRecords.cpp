@@ -14,7 +14,7 @@ namespace SnakeGame
 		data.titleScreen.setCharacterSize(48);
 		data.titleScreen.setFillColor(sf::Color::White);
 
-		data.playerScore.setString(std::to_string(game.profile.score));
+		data.playerScore.setString(std::to_string(game.profile.maxScore));
 		data.playerScore.setFont(data.font);
 		data.playerScore.setCharacterSize(48);
 		data.playerScore.setFillColor(sf::Color::White);
@@ -26,7 +26,7 @@ namespace SnakeGame
 
 		for (size_t i = 0; i < 6; i++)
 		{
-			data.recordsText.setString(data.recordsText.getString() + "\n" + game.recordsTable[i].name + ": " + std::to_string(game.recordsTable[i].score));
+			data.recordsText.setString(data.recordsText.getString() + "\n" + game.recordsTable[i].name + ": " + std::to_string(game.recordsTable[i].maxScore));
 			
 		}
 		data.recordsText.setFont(data.font);
@@ -42,5 +42,4 @@ namespace SnakeGame
 		window.draw(data.titleTable);
 		window.draw(data.recordsText);
 	}
-
 }

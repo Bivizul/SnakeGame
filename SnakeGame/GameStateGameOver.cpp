@@ -30,7 +30,7 @@ namespace SnakeGame
 		data.titleScreenText.setOrigin(GetItemOrigin(data.titleScreenText, { 0.5f, 0.f }));
 		data.titleScreenText.setStyle(sf::Text::Bold);
 
-		data.playerScoreText.setString(std::to_string(game.profile.score));
+		data.playerScoreText.setString(std::to_string(game.profile.currentScore));
 		data.playerScoreText.setFont(data.font);
 		data.playerScoreText.setCharacterSize(32);
 		data.playerScoreText.setFillColor(sf::Color::White);
@@ -45,7 +45,7 @@ namespace SnakeGame
 
 		for (size_t i = 0; i < 6; i++)
 		{
-			data.recordsText.setString(data.recordsText.getString() + "\n" + game.recordsTable[i].name + ": " + std::to_string(game.recordsTable[i].score));
+			data.recordsText.setString(data.recordsText.getString() + "\n" + game.recordsTable[i].name + ": " + std::to_string(game.recordsTable[i].maxScore));
 
 		}
 		data.recordsText.setFont(data.font);
@@ -151,7 +151,7 @@ namespace SnakeGame
 		data.recordsText.setString("");
 		for (int i = 0; i < 6; ++i)
 		{
-			data.recordsText.setString(data.recordsText.getString() + "\n" + FormatTableScore(i, game.recordsTable[i].score));
+			data.recordsText.setString(data.recordsText.getString() + "\n" + FormatTableScore(i, game.recordsTable[i].maxScore));
 		}
 		data.recordsText.setOrigin(GetItemOrigin(data.recordsText, { 0.5f, 0.f }));
 	}

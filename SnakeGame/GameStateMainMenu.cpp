@@ -100,7 +100,7 @@ namespace SnakeGame
 
 		for (const ProfileItem& item : game.recordsTable)
 		{
-			data.recordsItem.text.setString(data.recordsItem.text.getString() + "\n" + FormatTableProfile(item.name, item.score));
+			data.recordsItem.text.setString(data.recordsItem.text.getString() + "\n" + FormatTableProfile(item.name, item.maxScore));
 		}
 		data.recordsItem.text.setFont(data.font);
 		data.recordsItem.text.setCharacterSize(24);

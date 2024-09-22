@@ -18,9 +18,12 @@ namespace SnakeGame
 		sf::Texture snakeBodyTexture;
 		sf::Texture appleTexture;
 		sf::Texture wallTexture;
+
+		sf::Texture cupTexture;
+		sf::Sprite cupSprite;
+
 		sf::Texture grassTexture;
 		sf::Sprite grassSprite;
-		sf::RectangleShape wallShape;
 
 		sf::SoundBuffer appleEatBuffer;
 		sf::SoundBuffer deathBuffer;
@@ -32,14 +35,15 @@ namespace SnakeGame
 		std::vector<Apple> apples;
 		ApplesGrid applesGrid;
 		int numEatenApples = 0;
+		int playerScore = 0;
 		std::vector<Wall> walls;
 
 		// UI data
-		sf::Text scoreText;
+		sf::Text currentScoreText;
+		sf::Text maxScoreText;
 		//sf::Text inputHintText;
 		Apple scoreApple;
 
-		sf::RectangleShape playingFieldBackground;
 		sf::RectangleShape infoBackground;
 	};
 
