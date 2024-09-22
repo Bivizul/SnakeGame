@@ -66,7 +66,7 @@ namespace SnakeGame
 		//InitButton(data.mainMenuButton, data.font, L"В главное\nменю");
 		//InitButton(data.mainMenuButton, data.font, mm);
 
-		
+
 		data.startGameButton.shape.setSize({ 200.f, 80.f });
 		data.startGameButton.shape.setFillColor(sf::Color::White);
 		data.startGameButton.shape.setOrigin(data.startGameButton.shape.getSize().x / 2, data.startGameButton.shape.getSize().y / 2);
@@ -78,7 +78,7 @@ namespace SnakeGame
 		data.startGameButton.text.setFillColor(sf::Color::Black);
 		data.startGameButton.text.setString(sg);
 		data.startGameButton.text.setOrigin(GetItemOrigin(data.startGameButton.text, { 0.0f, 0.5f }));
-		
+
 		data.mainMenuButton.shape.setSize({ 200.f, 80.f });
 		data.mainMenuButton.shape.setFillColor(sf::Color::White);
 		data.mainMenuButton.shape.setOrigin(data.mainMenuButton.shape.getSize().x / 2, data.mainMenuButton.shape.getSize().y / 2);
@@ -93,6 +93,8 @@ namespace SnakeGame
 
 		InitButtonItem(data.buttonNav.rootButtons);
 		SelectButtonNavItem(data.buttonNav, &data.startGameButton);
+
+		InitTableRecordsPopup(data.tableRecords, game);
 
 	}
 
@@ -131,7 +133,7 @@ namespace SnakeGame
 				}
 			}
 
-			Orientation orientation = data.buttonNav.selectedButton	->parent->childrenOrientation;
+			Orientation orientation = data.buttonNav.selectedButton->parent->childrenOrientation;
 			if (orientation == Orientation::Vertical && event.key.code == sf::Keyboard::W ||
 				orientation == Orientation::Horizontal && event.key.code == sf::Keyboard::A)
 			{
@@ -162,7 +164,7 @@ namespace SnakeGame
 		data.background.setSize(parentViewSize);
 		window.draw(data.background);
 
-		data.popup.setPosition(parentViewSize / 2.f);
+		data.popup.setPosition(parentViewSize.x / 4.f * 2.6f, parentViewSize.y / 2.f);
 		window.draw(data.popup);
 
 		sf::Vector2f viewSize = (sf::Vector2f)data.popup.getSize();
@@ -182,5 +184,7 @@ namespace SnakeGame
 
 		DrawButton(data.startGameButton, viewPosition.x, data.recordsText.getPosition().y + data.recordsText.getLocalBounds().height + 100, window);
 		DrawButton(data.mainMenuButton, viewPosition.x, data.startGameButton.shape.getPosition().y + 100, window);
+
+		DrawTableRecordsPopup(data.tableRecords, parentViewSize.x / 4.f * 1.4f, parentViewSize.y / 2.f, window);
 	}
 }

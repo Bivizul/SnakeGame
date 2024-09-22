@@ -46,7 +46,7 @@
     <ClCompile Include="Button.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="GameStateTableRecords.cpp">
+    <ClCompile Include="TableRecordsPopup.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
   </ItemGroup>
@@ -87,7 +87,7 @@
     <ClInclude Include="CheckBox.h">
       <Filter>Sources</Filter>
     </ClInclude>
-    <ClInclude Include="GameStateTableRecords.h">
+    <ClInclude Include="TableRecordsPopup.h">
       <Filter>Sources</Filter>
     </ClInclude>
     <ClInclude Include="Button.h">

@@ -167,7 +167,7 @@
     <ClCompile Include="GameStateGameOver.cpp" />
     <ClCompile Include="GameStateMainMenu.cpp" />
     <ClCompile Include="GameStatePlaying.cpp" />
-    <ClCompile Include="GameStateTableRecords.cpp" />
+    <ClCompile Include="TableRecordsPopup.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Math.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -183,7 +183,7 @@
     <ClInclude Include="GameStateGameOver.h" />
     <ClInclude Include="GameStateMainMenu.h" />
     <ClInclude Include="GameStatePlaying.h" />
-    <ClInclude Include="GameStateTableRecords.h" />
+    <ClInclude Include="TableRecordsPopup.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Math.h" />
     <ClInclude Include="Player.h" />

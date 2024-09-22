@@ -1,6 +1,7 @@
 #pragma once
 #include "SFML/Graphics.hpp"
 #include "Button.h"
+#include "TableRecordsPopup.h"
 
 namespace SnakeGame
 {
@@ -28,6 +29,8 @@ namespace SnakeGame
 		ButtonItem startGameButton;
 		ButtonItem mainMenuButton;
 		ButtonNav buttonNav;
+
+		TableRecordsPopup tableRecords;
 	};
 
 	void InitGameStateGameOver(GameStateGameOverData& data, Game& game);
