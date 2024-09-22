@@ -35,5 +35,5 @@ namespace SnakeGame
 	void ClearApplesGrid(ApplesGrid& applesGrid);
 	void AddAppleToGrid(ApplesGrid& applesGrid, Apple& apple);
 	void RemoveAppleFromGrid(ApplesGrid& applesGrid, Apple& apple);
-	bool FindPlayerCollisionWithApples(const Vector2D& playerPosition, const ApplesGrid& grid, Apple** result, int& numFoundApples); // Result should be a pointer to an array of MAX_APPLES / 4 pointers to apples
+	bool FindPlayerCollisionWithApples(const Vector2D& playerPosition, const ApplesGrid& grid, Apple** result, int& numFoundApples);
 }

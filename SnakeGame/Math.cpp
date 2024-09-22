@@ -52,7 +52,6 @@ namespace SnakeGame
 	void DrawItemsList(sf::RenderWindow& window, const std::vector<sf::Text*>& items, float spacing, Orientation orientation, Alignment alignment, const sf::Vector2f& position, const sf::Vector2f& origin)
 	{
 		sf::FloatRect totalRect;
-		// Calculate total height/width of all texts
 		for (auto it = items.begin(); it != items.end(); ++it)
 		{
 			sf::FloatRect itemRect = (*it)->getGlobalBounds();
@@ -121,86 +120,55 @@ namespace SnakeGame
 
 	std::string FormatTableProfile(std::string name, int score)
 	{
-		// Ширина строки (например, 20 символов)
 		int lineWidth = 20;
-
-		// Форматирование строк
 		std::ostringstream oss;
 		oss << FormatLine(name, score, lineWidth);
-
 		return oss.str();
 	}
 
 	std::string FormatTableScore(int number, int score)
 	{
-		// Ширина строки (например, 20 символов)
 		int lineWidth = 20;
-
-		// Форматирование строк
 		std::ostringstream oss;
 		oss << FormatLine(number, score, lineWidth);
-
 		return oss.str();
 	}
 
-
-	// Функция для форматирования строки с выравниванием
 	std::string FormatLine(std::string name, int score, int maxLineWidth) {
 		std::ostringstream oss;
 		oss << name;
-
-		// Получаем форматированное число с пробелами каждые три знака
 		std::string formattedValue = FormatNumber(score);
-
-		// Рассчитываем количество оставшегося пространства для выравнивания
 		int numLength = oss.str().length();
 		int spaceForNumber = maxLineWidth - numLength - formattedValue.length();
-
-		// Добавляем пробелы для выравнивания числа по правому краю
 		oss << std::string(spaceForNumber, ' ') << formattedValue;
-
 		return oss.str();
 	}
 
-	// Функция для форматирования строки с выравниванием
 	std::string FormatLine(int number, int score, int maxLineWidth) {
 		std::ostringstream oss;
 		oss << number << ". ";
-
-		// Получаем форматированное число с пробелами каждые три знака
 		std::string formattedValue = FormatNumber(score);
-
-		// Рассчитываем количество оставшегося пространства для выравнивания
 		int numLength = oss.str().length();
 		int spaceForNumber = maxLineWidth - numLength - formattedValue.length();
-
-		// Добавляем пробелы для выравнивания числа по правому краю
 		oss << std::string(spaceForNumber, ' ') << formattedValue;
-
 		return oss.str();
 	}
 
-	// Функция для форматирования числа с пробелами каждые три знака
 	std::string FormatNumber(int value) {
 		std::ostringstream oss;
 		std::string number = std::to_string(value);
 		int len = number.length();
-
-		// Добавляем пробелы каждые три цифры
 		for (int i = 0; i < len; ++i) {
 			oss << number[i];
 			if ((len - i - 1) % 3 == 0 && i != len - 1) {
 				oss << ' ';
 			}
 		}
-
 		return oss.str();
 	}
 
-	// Разделение текста на строки
-	std::vector<std::string> SplitString(const std::string& str, char delimiter) {
-
-		//std::cout << "str " << str << std::endl;
+	std::vector<std::string> SplitString(const std::string& str, char delimiter) 
+	{
 		std::vector<std::string> lines;
 		std::string line;
 		std::istringstream stream(str);
@@ -210,89 +178,29 @@ namespace SnakeGame
 		return lines;
 	}
 
-	// Центрируем текст с учетом каждой строки
 	void CenterText(sf::Text& text, sf::RenderWindow& window)
 	{
-			//// Разделяем текст на строки по '\n'
-			//std::vector<std::string> lines = SplitString(text.getString(), '\n');
-
-			//text.setString("");
-
-			//std::cout << "lines.size() " << lines.size() << std::endl;
-
-			//// Хранение позиционных данных
-			//std::vector<sf::Vector2f> positions;
-			//float windowWidth = window.getSize().x;
-			//float yPosition = 100;  // Начальная позиция по оси Y
-			//float totalHeight = 0;
-
-			//for (const auto& line : lines) {
-			//	// Создаем временный объект текста для каждой строки
-			//	sf::Text tempText = text;
-			//	tempText.setString(line);
-
-			//	// Получаем размеры каждой строки
-			//	sf::FloatRect bounds = tempText.getLocalBounds();
-
-			//	// Центрируем каждую строку по оси X и сохраняем позицию
-			//	float centeredX = (windowWidth - bounds.width) / 2;
-			//	positions.push_back(sf::Vector2f(centeredX, yPosition));
-
-			//	// Смещаем позицию Y для следующей строки
-			//	yPosition += bounds.height + 10;
-			//	totalHeight += bounds.height;
-
-			//	std::cout << line << std::endl;
-			//}
-
-			//// Теперь перезаписываем исходный текст с учетом каждой строки и её позиции
-
-			//for (size_t i = 0; i < lines.size(); ++i) {
-			//	// Применяем позицию для каждой строки вручную
-			//	text.setString(text.getString() + lines[i] + '\n');
-			//	text.setPosition(positions[i]);
-			//	window.draw(text);
-			//}
-
-		//std::cout << "text.getString().toAnsiString() " << text.getString().toAnsiString() << std::endl;
-
-		// Разделяем текст на строки по '\n'
 		std::vector<std::string> lines = SplitString(text.getString(), '\n');
-
-		// Хранение позиционных данных
-		//float windowWidth = window.getSize().x;
 		float windowWidth = text.getPosition().x * 2;
-		//float yPosition = 100;  // Начальная позиция по оси Y
-		float yPosition = text.getPosition().y;  // Начальная позиция по оси Y
+		float yPosition = text.getPosition().y;
 
 		for (const auto& line : lines) {
-			// Создаем временный объект текста для каждой строки
 			sf::Text tempText = text;
 			tempText.setString(line);
-			//tempText.setOrigin(GetItemOrigin(tempText, { 0.5f, 0.5f }));
-
-			// Получаем размеры каждой строки
 			sf::FloatRect bounds = tempText.getLocalBounds();
-
-			// Центрируем каждую строку по оси X
 			float centeredX = (windowWidth - bounds.width) /2;
 			tempText.setPosition(centeredX, yPosition);
-
-			// Рисуем каждую строку отдельно
 			window.draw(tempText);
-
-			// Смещаем позицию Y для следующей строки
-			yPosition += bounds.height + 10;  // 10 — отступ между строками
+			yPosition += bounds.height + 10;
 		}
 	}
 
-	// Функция замены символов '\n' на текст "[NEWLINE]" для демонстрации
 	std::string ReplaceNewlines(const std::string& input) {
 		std::string result = input;
 		size_t pos = 0;
 		while ((pos = result.find('\n', pos)) != std::string::npos) {
 			result.replace(pos, 1, "[NEWLINE]");
-			pos += 9; // Длина "[NEWLINE]"
+			pos += 9;
 		}
 		return result;
 	}
@@ -301,10 +209,9 @@ namespace SnakeGame
 	bool IsPositionProhibited(float x, float y, const std::vector<Position>& prohibitedPositions) {
 		for (const auto& pos : prohibitedPositions) {
 			if (std::abs(x - pos.x) <= 40.f && std::abs(y - pos.y) <= 40.f) {
-				return true; // Если попадаем в запрещенную зону
+				return true;
 			}
 		}
 		return false;
 	}
-
 }

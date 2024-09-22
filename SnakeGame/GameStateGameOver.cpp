@@ -9,10 +9,9 @@ namespace SnakeGame
 	{
 		assert(data.font.loadFromFile(RESOURCES_PATH + "Fonts/RobotoMono-Regular.ttf"));
 
-		data.background.setFillColor(sf::Color(0, 0, 0, 128)); // Semi-transparent black
+		data.background.setFillColor(sf::Color(0, 0, 0, 128));
 
 		data.popup.setSize({ 400,650 });
-		//data.shape.setFillColor(sf::Color(128, 128, 128));
 		data.popup.setFillColor(sf::Color::Black);
 		data.popup.setOutlineThickness(6);
 		data.popup.setOutlineColor(sf::Color::White);

@@ -11,7 +11,6 @@ namespace SnakeGame
 
 	struct GameStatePlayingData
 	{
-		// Resources
 		sf::Font font;
 
 		sf::Texture snakeHeadTexture;
@@ -30,7 +29,6 @@ namespace SnakeGame
 		sf::Sound appleEatSound;
 		sf::Sound deathSound;
 
-		// Game data
 		Player player;
 		std::vector<Apple> apples;
 		ApplesGrid applesGrid;
@@ -38,10 +36,8 @@ namespace SnakeGame
 		int playerScore = 0;
 		std::vector<Wall> walls;
 
-		// UI data
 		sf::Text currentScoreText;
 		sf::Text maxScoreText;
-		//sf::Text inputHintText;
 		Apple scoreApple;
 
 		sf::RectangleShape infoBackground;

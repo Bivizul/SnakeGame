@@ -179,7 +179,7 @@ namespace SnakeGame
 			break;
 		}
 		default:
-			assert(false); // We want to know if we forgot to implement new game statee
+			assert(false);
 			break;
 		}
 	}
@@ -213,7 +213,7 @@ namespace SnakeGame
 			break;
 		}
 		default:
-			assert(false); // We want to know if we forgot to implement new game statee
+			assert(false);
 			break;
 		}
 
@@ -245,7 +245,7 @@ namespace SnakeGame
 			break;
 		}
 		default:
-			assert(false); // We want to know if we forgot to implement new game statee
+			assert(false);
 			break;
 		}
 	}
@@ -275,7 +275,7 @@ namespace SnakeGame
 			break;
 		}
 		default:
-			assert(false); // We want to know if we forgot to implement new game statee
+			assert(false);
 			break;
 		}
 	}
@@ -305,7 +305,7 @@ namespace SnakeGame
 			break;
 		}
 		default:
-			assert(false); // We want to know if we forgot to implement new game statee
+			assert(false);
 			break;
 		}
 	}

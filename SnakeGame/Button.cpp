@@ -15,7 +15,6 @@ namespace SnakeGame
 
 	void SelectButtonNavItem(ButtonNav& buttonNav, ButtonItem* item)
 	{
-		// It is definitely error to select root item
 		assert(item != &buttonNav.rootButtons);
 
 		if (buttonNav.selectedButton == item)
@@ -25,7 +24,6 @@ namespace SnakeGame
 
 		if (item && !item->isEnabled)
 		{
-			// Don't allow to select disabled item
 			return;
 		}
 
@@ -47,7 +45,7 @@ namespace SnakeGame
 		if (buttonNav.selectedButton)
 		{
 			ButtonItem* parent = buttonNav.selectedButton->parent;
-			assert(parent); // There always should be parent
+			assert(parent);
 
 			auto it = std::find(parent->children.begin(), parent->children.end(), buttonNav.selectedButton);
 			if (it != parent->children.begin())
@@ -65,7 +63,7 @@ namespace SnakeGame
 		if (buttonNav.selectedButton)
 		{
 			ButtonItem* parent = buttonNav.selectedButton->parent;
-			assert(parent); // There always should be parent
+			assert(parent);
 			auto it = std::find(parent->children.begin(), parent->children.end(), buttonNav.selectedButton);
 			if (it != parent->children.end() - 1)
 			{

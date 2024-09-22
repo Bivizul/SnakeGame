@@ -30,7 +30,6 @@ namespace SnakeGame
 		MenuItem* selectedItem = nullptr;
 	};
 
-	// Links children to parent
 	void InitMenuItem(MenuItem& menu);
 	void SelectMenuItem(Menu& menu, MenuItem* item);
 	bool SelectPreviousMenuItem(Menu& menu);

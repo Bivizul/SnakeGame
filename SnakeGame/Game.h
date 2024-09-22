@@ -67,7 +67,6 @@ namespace SnakeGame
 		GameStateType pendingGameStateType = GameStateType::None;
 		bool pendingGameStateIsExclusivelyVisible = false;
 
-		//GameOptions options = GameOptions::Default;
 		GameOptions options = GameOptions::VeryEasy;
 		GameSettings settings = GameSettings::Default;
 		ProfileItem recordsTable[MAX_RECORDS_TABLE_SIZE];
@@ -77,7 +76,7 @@ namespace SnakeGame
 
 	void InitGame(Game& game);
 	void HandleWindowEvents(Game& game, sf::RenderWindow& window);
-	bool UpdateGame(Game& game, float timeDelta); // Return false if game should be closed
+	bool UpdateGame(Game& game, float timeDelta);
 	void DrawGame(Game& game, sf::RenderWindow& window);
 	void ShutdownGame(Game& game);
 

@@ -3,10 +3,8 @@
 
 namespace SnakeGame
 {
-	// Resources path
 	const std::string RESOURCES_PATH = "Resources/";
 
-	// Game settings constants
 	const float PLAYER_SIZE = 40.f;
 	const float APPLE_SIZE = 40.f;
 	const float WALL_SIZE = 40.f;
@@ -32,8 +30,7 @@ namespace SnakeGame
 
 	const unsigned int APPLES_GRID_CELLS_HORIZONTAL = unsigned(SCREEN_WIDTH / (APPLE_SIZE * 4));
 	const unsigned int APPLES_GRID_CELLS_VERTICAL = unsigned(SCREEN_HEIGHT / (APPLE_SIZE * 4));
-	//const unsigned int MAX_APPLES_IN_CELL = MAX_APPLES / 4; // We don't expect too much apples in one cell
-	const unsigned int MAX_APPLES_IN_CELL = MAX_APPLES; // We don't expect too much apples in one cell
+	const unsigned int MAX_APPLES_IN_CELL = MAX_APPLES;
 
 	const int MAX_RECORDS_TABLE_SIZE = 10;
 }

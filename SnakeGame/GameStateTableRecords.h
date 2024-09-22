@@ -7,7 +7,6 @@ namespace SnakeGame
 {
 	struct GameStateTableRecordsData
 	{
-		// Resources
 		sf::Font font;
 
 		sf::Text titleScreen;
@@ -15,13 +14,11 @@ namespace SnakeGame
 		sf::Text titleTable;
 
 		sf::Text recordsText;
-		//std::vector<ProfileItem> records;
 
 		ButtonItem startGameButton;
 		ButtonItem mainMenuButton;
 	};
 
-	// Returns pointer to the allocated data
 	void InitGameStateTableRecords(GameStateTableRecordsData& data, Game& game);
 	void DrawGameStateTableRecords(GameStateTableRecordsData& data, sf::RenderWindow& window);
 }

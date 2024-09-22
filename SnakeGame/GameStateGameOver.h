@@ -14,12 +14,8 @@ namespace SnakeGame
 
 	struct GameStateGameOverData
 	{
-		// Resources
 		sf::Font font;
 
-		//float timeSinceGameOver = 0.f;
-
-		// UI data
 		sf::RectangleShape popup;
 		sf::RectangleShape background;
 
@@ -28,15 +24,12 @@ namespace SnakeGame
 		sf::Text titleTableText;
 
 		sf::Text recordsText;
-		//std::vector<ProfileItem> records;
 
-		//GameOverButton selectButton;
 		ButtonItem startGameButton;
 		ButtonItem mainMenuButton;
 		ButtonNav buttonNav;
 	};
 
-	// Returns pointer to the allocated data
 	void InitGameStateGameOver(GameStateGameOverData& data, Game& game);
 	void ShutdownGameStateGameOver(GameStateGameOverData& data, Game& game);
 	void HandleGameStateGameOverWindowEvent(GameStateGameOverData& data, Game& game, const sf::Event& event);

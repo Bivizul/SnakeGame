@@ -174,21 +174,9 @@ namespace SnakeGame
 		{
 			for (int i = 0; i < numCollidingApples; i++)
 			{
-				/*if ((std::uint8_t)game.options & (std::uint8_t)GameOptions::InfiniteApples)
-				{*/
-				// Move apple to a new random position
-
 				ResetAppleState(*collidingApples[i], data.player.segmentsPositions);
 				AddAppleToGrid(data.applesGrid, *collidingApples[i]);
-				//}
-				//else
-				//{
-				//	// Mark apple as eaten
-				//	MarkAppleAsEaten(*collidingApples[i]);
-				//	RemoveAppleFromGrid(data.applesGrid, *collidingApples[i]);
-				//}
 
-				// Increase eaten apples counter
 				data.numEatenApples++;
 
 				switch (game.options)
@@ -221,13 +209,6 @@ namespace SnakeGame
 				default:
 					break;
 				}
-
-
-				// Increase player speed
-				//if ((std::uint8_t)game.options & (std::uint8_t)GameOptions::WithAcceleration)
-				//{
-					//data.player.speed -= ACCELERATION_VERY_HARD;
-				//}
 				data.appleEatSound.play();
 
 				Grow(data.player, data.snakeBodyTexture);
@@ -257,7 +238,6 @@ namespace SnakeGame
 	void SetGameOverState(GameStatePlayingData& data, Game& game)
 	{
 		data.deathSound.play();
-		// Find player in records table and update his score
 		for (ProfileItem& item : game.recordsTable)
 		{
 			if (item.name == game.profile.name)
@@ -273,7 +253,6 @@ namespace SnakeGame
 			}
 		}
 
-		// Sort records table
 		std::sort(std::begin(game.recordsTable), std::end(game.recordsTable));
 
 		PushGameState(game, GameStateType::GameOver, false);
@@ -286,9 +265,8 @@ namespace SnakeGame
 		data.infoBackground.setSize({ SCREEN_WIDTH,INFO_HEIGHT });
 		window.draw(data.infoBackground);
 
-		// Draw player
 		DrawPlayer(data.player, window);
-		// Draw apples
+
 		for (Apple& apple : data.apples)
 		{
 			DrawApple(apple, window);

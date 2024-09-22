@@ -8,7 +8,7 @@ namespace SnakeGame
 	void InitApple(Apple& apple, const sf::Texture& texture)
 	{
 		apple.sprite.setTexture(texture);
-		apple.sprite.setOrigin(GetItemOrigin(apple.sprite, { 0.5f, 0.5f })); // We need to use texture as origin ignores scale
+		apple.sprite.setOrigin(GetItemOrigin(apple.sprite, { 0.5f, 0.5f }));
 		apple.sprite.setScale(GetSpriteScale(apple.sprite, { APPLE_SIZE, APPLE_SIZE }));
 	}
 
@@ -36,7 +36,6 @@ namespace SnakeGame
 			newY = INFO_HEIGHT + WALL_SIZE + ((float)(rand() % (SCREEN_HEIGHT - ((int)WALL_SIZE * 2) - INFO_HEIGHT + 1)));
 		} while (IsPositionProhibited(newX, newY, prohibitedPositions));
 
-		// Присваиваем новые координаты яблоку
 		apple.position.x = newX;
 		apple.position.y = newY;
 		apple.isEaten = false;

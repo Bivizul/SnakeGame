@@ -11,7 +11,6 @@ namespace SnakeGame
 		assert(data.font.loadFromFile(RESOURCES_PATH + "Fonts/RobotoMono-Regular.ttf"));
 
 		data.popup.setSize({ 400,600 });
-		//data.shape.setFillColor(sf::Color(128, 128, 128));
 		data.popup.setFillColor(sf::Color::Black);
 		data.popup.setOutlineThickness(6);
 		data.popup.setOutlineColor(sf::Color::White);
@@ -83,11 +82,9 @@ namespace SnakeGame
 
 		sf::FloatRect textBounds = data.tableRecordsItem.hintText.getLocalBounds();
 
-		// Рассчитываем позицию текста по центру окна
 		float x = (data.popup.getSize().x - textBounds.width) / 2.0f;
 		float y = (data.popup.getSize().y - textBounds.height) / 2.0f;
 
-		// Устанавливаем позицию текста с учётом отступов (левый верхний угол текста)
 		data.tableRecordsItem.hintText.setPosition(x - textBounds.left, y - textBounds.top);
 
 		data.tableRecordsItem.hintText.setFont(data.font);
@@ -287,14 +284,11 @@ namespace SnakeGame
 
 		DrawMenu(data.menu, window, viewPosition, { 0.5f, 0.4f });
 
-		// Только в разделе "Настройки" отображаем чекбоксы для звука и музыки
 		if (data.menu.selectedItem->parent == &data.settingsItem)
 		{
-			// Обновляем позиции чекбоксов
 			UpdateCheckBoxPosition(data.settingsSoundItem.checkBox, data.settingsSoundItem.text);
 			UpdateCheckBoxPosition(data.settingsMusicItem.checkBox, data.settingsMusicItem.text);
 
-			// Отрисовка чекбоксов
 			DrawCheckBox(data.settingsSoundItem.checkBox, window);
 			DrawCheckBox(data.settingsMusicItem.checkBox, window);
 		}
