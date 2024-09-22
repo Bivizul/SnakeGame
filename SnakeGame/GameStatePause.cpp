@@ -1,5 +1,5 @@
 #include "Game.h"
-#include "GameStateExitDialog.h"
+#include "GameStatePause.h"
 #include <assert.h>
 
 namespace SnakeGame

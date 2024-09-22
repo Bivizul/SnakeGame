@@ -34,7 +34,7 @@
     <ClCompile Include="Math.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="GameStateExitDialog.cpp">
+    <ClCompile Include="GameStatePause.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="Menu.cpp">
@@ -78,7 +78,7 @@
     <ClInclude Include="Math.h">
       <Filter>Sources</Filter>
     </ClInclude>
-    <ClInclude Include="GameStateExitDialog.h">
+    <ClInclude Include="GameStatePause.h">
       <Filter>Sources</Filter>
     </ClInclude>
     <ClInclude Include="Menu.h">

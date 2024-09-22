@@ -1,5 +1,5 @@
 #include "Game.h"
-#include "GameStateExitDialog.h"
+#include "GameStatePause.h"
 #include "GameStateGameOver.h"
 #include "GameStateMainMenu.h"
 #include "GameStatePlaying.h"
