@@ -10,7 +10,7 @@ namespace SnakeGame
 	struct GameStateMainMenuData
 	{
 		sf::Font font;
-		sf::RectangleShape popup;
+		sf::RectangleShape popupBackground;
 
 		MenuItem startGameItem;
 

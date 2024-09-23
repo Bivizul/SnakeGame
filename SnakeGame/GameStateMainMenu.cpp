@@ -10,11 +10,11 @@ namespace SnakeGame
 	{
 		assert(data.font.loadFromFile(RESOURCES_PATH + "Fonts/RobotoMono-Regular.ttf"));
 
-		data.popup.setSize({ 400,600 });
-		data.popup.setFillColor(sf::Color::Black);
-		data.popup.setOutlineThickness(6);
-		data.popup.setOutlineColor(sf::Color::White);
-		data.popup.setOrigin(data.popup.getSize().x / 2, data.popup.getSize().y / 2);
+		data.popupBackground.setSize({ 400,600 });
+		data.popupBackground.setFillColor(sf::Color::Black);
+		data.popupBackground.setOutlineThickness(6);
+		data.popupBackground.setOutlineColor(sf::Color::White);
+		data.popupBackground.setOrigin(data.popupBackground.getSize().x / 2, data.popupBackground.getSize().y / 2);
 
 		//--------------------------------------------------
 
@@ -82,8 +82,8 @@ namespace SnakeGame
 
 		sf::FloatRect textBounds = data.tableRecordsItem.hintText.getLocalBounds();
 
-		float x = (data.popup.getSize().x - textBounds.width) / 2.0f;
-		float y = (data.popup.getSize().y - textBounds.height) / 2.0f;
+		float x = (data.popupBackground.getSize().x - textBounds.width) / 2.0f;
+		float y = (data.popupBackground.getSize().y - textBounds.height) / 2.0f;
 
 		data.tableRecordsItem.hintText.setPosition(x - textBounds.left, y - textBounds.top);
 
@@ -271,11 +271,11 @@ namespace SnakeGame
 	{
 		sf::Vector2f parentViewSize = (sf::Vector2f)window.getSize();
 
-		data.popup.setPosition(parentViewSize / 2.f);
-		window.draw(data.popup);
+		data.popupBackground.setPosition(parentViewSize / 2.f);
+		window.draw(data.popupBackground);
 
-		sf::Vector2f viewSize = (sf::Vector2f)data.popup.getSize();
-		sf::Vector2f viewPosition = (sf::Vector2f)data.popup.getPosition();
+		sf::Vector2f viewSize = (sf::Vector2f)data.popupBackground.getSize();
+		sf::Vector2f viewPosition = (sf::Vector2f)data.popupBackground.getPosition();
 
 		sf::Text* hintText = &GetCurrentMenuContext(data.menu)->hintText;
 		hintText->setOrigin(GetItemOrigin(*hintText, { 0.5f, 0.f }));

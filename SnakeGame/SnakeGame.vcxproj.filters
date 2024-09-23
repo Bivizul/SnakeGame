@@ -49,6 +49,12 @@
     <ClCompile Include="TableRecordsPopup.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="EnterNamePopup.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="NumberOfPointsPopup.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -91,6 +97,12 @@
       <Filter>Sources</Filter>
     </ClInclude>
     <ClInclude Include="Button.h">
+      <Filter>Sources</Filter>
+    </ClInclude>
+    <ClInclude Include="EnterNamePopup.h">
+      <Filter>Sources</Filter>
+    </ClInclude>
+    <ClInclude Include="NumberOfPointsPopup.h">
       <Filter>Sources</Filter>
     </ClInclude>
   </ItemGroup>

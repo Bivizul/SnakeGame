@@ -15,7 +15,7 @@ namespace SnakeGame
 
 	void InitGame(Game& game)
 	{
-		game.profile = { "XYZ", 0 , 0};
+		game.profile = { PROFILE_NAME_DEFAULT, 0 , 0 };
 
 		// Generate fake records table
 		game.recordsTable[0] = { "John", 1000000 };
@@ -25,7 +25,7 @@ namespace SnakeGame
 		game.recordsTable[4] = { "Awerhw", 98000 };
 		game.recordsTable[5] = { "HBqweg",66899 };
 		game.recordsTable[6] = { "GVe", 57878 };
-		game.recordsTable[7] = { "Brwe", 9663};
+		game.recordsTable[7] = { "Brwe", 9663 };
 		game.recordsTable[8] = { "HBWRwhh", 897 };
 		game.recordsTable[9] = game.profile;
 

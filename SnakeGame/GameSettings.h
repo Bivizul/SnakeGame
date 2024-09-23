@@ -33,4 +33,6 @@ namespace SnakeGame
 	const unsigned int MAX_APPLES_IN_CELL = MAX_APPLES;
 
 	const int MAX_RECORDS_TABLE_SIZE = 10;
+
+	const std::string PROFILE_NAME_DEFAULT = "XYZ";
 }
