@@ -173,73 +173,89 @@ namespace SnakeGame
 		{
 			if (event.key.code == sf::Keyboard::Escape)
 			{
+				game.keyPressedSound.play();
 				CollapseSelectedItem(data.menu);
 			}
 			else if (event.key.code == sf::Keyboard::Enter)
 			{
 				if (data.menu.selectedItem == &data.startGameItem)
 				{
+					game.keyPressedSound.play();
 					SwitchGameState(game, GameStateType::Playing);
 				}
 				else if (data.menu.selectedItem == &data.optionsItem)
 				{
+					game.keyPressedSound.play();
 					ExpandSelectedItem(data.menu);
 				}
 				else if (data.menu.selectedItem == &data.optionsVeryEasyItem)
 				{
+					game.keyPressedSound.play();
 					game.options = GameOptions::VeryEasy;
 					SwitchGameState(game, GameStateType::Playing);
 				}
 				else if (data.menu.selectedItem == &data.optionsEasyItem)
 				{
+					game.keyPressedSound.play();
 					game.options = GameOptions::Easy;
 					SwitchGameState(game, GameStateType::Playing);
 				}
 				else if (data.menu.selectedItem == &data.optionsNormalItem)
 				{
+					game.keyPressedSound.play();
 					game.options = GameOptions::Normal;
 					SwitchGameState(game, GameStateType::Playing);
 				}
 				else if (data.menu.selectedItem == &data.optionsHardItem)
 				{
+					game.keyPressedSound.play();
 					game.options = GameOptions::Hard;
 					SwitchGameState(game, GameStateType::Playing);
 				}
 				else if (data.menu.selectedItem == &data.optionsVeryHardItem)
 				{
+					game.keyPressedSound.play();
 					game.options = GameOptions::VeryHard;
 					SwitchGameState(game, GameStateType::Playing);
 				}
 				else if (data.menu.selectedItem == &data.tableRecordsItem)
 				{
+					game.keyPressedSound.play();
 					ExpandSelectedItem(data.menu);
 				}
 				else if (data.menu.selectedItem == &data.settingsItem)
 				{
+					game.keyPressedSound.play();
 					ExpandSelectedItem(data.menu);
 				}
 				else if (data.menu.selectedItem == &data.settingsSoundItem)
 				{
+					game.keyPressedSound.play();
 					game.settings = (GameSettings)((std::uint8_t)game.settings ^ (std::uint8_t)GameSettings::SoundEnabled);
 				}
 				else if (data.menu.selectedItem == &data.settingsMusicItem)
 				{
+					game.keyPressedSound.play();
 					game.settings = (GameSettings)((std::uint8_t)game.settings ^ (std::uint8_t)GameSettings::MusicEnabled);
 				}
 				else if (data.menu.selectedItem == &data.exitGameItem)
 				{
+					game.keyPressedSound.play();
 					ExpandSelectedItem(data.menu);
 				}
 				else if (data.menu.selectedItem == &data.yesItem)
 				{
+					game.keyPressedSound.play();
 					SwitchGameState(game, GameStateType::None);
 				}
 				else if (data.menu.selectedItem == &data.noItem)
 				{
+					game.keyPressedSound.play();
 					CollapseSelectedItem(data.menu);
 				}
 				else
 				{
+					game.keyPressedSound.play();
 					ExpandSelectedItem(data.menu);
 				}
 			}
@@ -248,11 +264,13 @@ namespace SnakeGame
 			if (orientation == Orientation::Vertical && event.key.code == sf::Keyboard::W ||
 				orientation == Orientation::Horizontal && event.key.code == sf::Keyboard::A)
 			{
+				game.keyPressedSound.play();
 				SelectPreviousMenuItem(data.menu);
 			}
 			else if (orientation == Orientation::Vertical && event.key.code == sf::Keyboard::S ||
 				orientation == Orientation::Horizontal && event.key.code == sf::Keyboard::D)
 			{
+				game.keyPressedSound.play();
 				SelectNextMenuItem(data.menu);
 			}
 		}

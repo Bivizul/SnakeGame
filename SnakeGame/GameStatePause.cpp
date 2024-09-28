@@ -31,12 +31,14 @@ namespace SnakeGame
 		{
 			if (event.key.code == sf::Keyboard::Escape && !data.countdownStarted)
 			{
+				game.keyPressedSound.play();
 				data.pauseTimeLeft = 3.f;
 				data.countdownStarted = true;
 				data.hintText.setString("PAUSE\n3 seconds left");
 			}
 			else if (event.key.code == sf::Keyboard::Enter)
 			{
+				game.keyPressedSound.play();
 				SwitchGameState(game, GameStateType::MainMenu);
 			}
 		}

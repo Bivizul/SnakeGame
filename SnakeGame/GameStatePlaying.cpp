@@ -2,6 +2,7 @@
 #include "GameStatePlaying.h"
 #include <assert.h>
 #include <iostream>
+#include <SFML/Audio.hpp>
 
 namespace SnakeGame
 {
@@ -18,13 +19,27 @@ namespace SnakeGame
 		assert(data.wallTexture.loadFromFile(RESOURCES_PATH + "table-sprite.png", sf::IntRect(62 + (64 * 14), 34 + (64 * 37), 64, 64)));
 		assert(data.cupTexture.loadFromFile(RESOURCES_PATH + "table-sprite.png", sf::IntRect(62 + (64 * 4), 34 + (64 * 23), 64, 64)));
 
-		//assert(data.appleEatBuffer.loadFromFile(RESOURCES_PATH + "AppleEat.wav"));
-		//assert(data.deathBuffer.loadFromFile(RESOURCES_PATH + "Death.wav"));
+		data.isMusicEnabled = ((std::uint8_t)game.settings & (std::uint8_t)GameSettings::MusicEnabled) != (std::uint8_t)GameSettings::Empty;
+		data.isSoundEnabled = ((std::uint8_t)game.settings & (std::uint8_t)GameSettings::SoundEnabled) != (std::uint8_t)GameSettings::Empty;
 
-		data.appleEatSound.setBuffer(data.appleEatBuffer);
-		data.deathSound.setBuffer(data.deathBuffer);
+		if (data.isMusicEnabled)
+		{
+			assert(data.backgroundSoundBuffer.loadFromFile(RESOURCES_PATH + "Clinthammer__Background_Music.wav"));
+			data.backgroundSound.setBuffer(data.backgroundSoundBuffer);
+		}
+		if (data.isSoundEnabled)
+		{
+			//assert(data.startGameSoundBuffer.loadFromFile(RESOURCES_PATH + "Timgormly__Enter.aiff"));
+			assert(data.collisionSoundBuffer.loadFromFile(RESOURCES_PATH + "Theevilsocks__menu-hover.wav"));
+			assert(data.endGameSoundBuffer.loadFromFile(RESOURCES_PATH + "Maodin204__Lose.wav"));
 
-		// Init player
+			//data.startGameSound.setBuffer(data.startGameSoundBuffer);
+			data.collisionSound.setBuffer(data.collisionSoundBuffer);
+			data.endGameSound.setBuffer(data.endGameSoundBuffer);
+		}
+
+		//data.startGameSound.play();
+
 		InitPlayer(data.player, data.snakeHeadTexture);
 
 		switch (game.options)
@@ -61,7 +76,6 @@ namespace SnakeGame
 		data.grassSprite.setTexture(data.grassTexture);
 		data.grassSprite.setScale(GetSpriteScale(data.grassSprite, { SCREEN_WIDTH, SCREEN_HEIGHT }));
 
-		// Init apples
 		data.apples.clear();
 		ClearApplesGrid(data.applesGrid);
 		int numApples = MIN_APPLES + rand() % (MAX_APPLES + 1 - MIN_APPLES);
@@ -69,25 +83,15 @@ namespace SnakeGame
 		for (Apple& apple : data.apples)
 		{
 			InitApple(apple, data.appleTexture);
-			//ResetAppleState(apple, data.player.segments);
 			ResetAppleState(apple, {});
 			AddAppleToGrid(data.applesGrid, apple);
 		}
 
-		// Init walls
 		data.walls.clear();
 		int numwalls = SCREEN_WIDTH / WALL_SIZE;
 		data.walls.resize(numwalls);
-		//for (Wall& wall : data.walls)
-		////for (int x = 0; x < data.walls.size(); x += WALL_SIZE)
-		//{
-		//	InitWall(data.walls[], data.wallTexture);
-
-		//}
 
 		InitWalls(data.walls, data.wallTexture);
-
-		//std::cout << data.walls.size() << std::endl;
 
 		data.numEatenApples = 0;
 		data.playerScore = 0;
@@ -120,6 +124,8 @@ namespace SnakeGame
 		{
 			std::cout << item.name << " item.maxScore " << item.maxScore << std::endl;
 		}
+
+		data.backgroundSound.play();
 	}
 
 	void ShutdownGameStatePlaying(GameStatePlayingData& data, Game& game)
@@ -133,6 +139,7 @@ namespace SnakeGame
 		{
 			if (event.key.code == sf::Keyboard::Escape)
 			{
+				game.keyPressedSound.play();
 				PushGameState(game, GameStateType::ExitDialog, false);
 			}
 		}
@@ -157,7 +164,6 @@ namespace SnakeGame
 			data.player.direction = PlayerDirection::Left;
 		}
 
-		// Update player
 		UpdatePlayer(data.player, timeDelta);
 
 		Apple* collidingApples[MAX_APPLES_IN_CELL] = { nullptr };
@@ -202,7 +208,7 @@ namespace SnakeGame
 				default:
 					break;
 				}
-				data.appleEatSound.play();
+				data.collisionSound.play();
 
 				Grow(data.player, data.snakeBodyTexture);
 
@@ -210,18 +216,9 @@ namespace SnakeGame
 			}
 		}
 
-		//&& !((std::uint8_t)game.options & (std::uint8_t)GameOptions::InfiniteApples);
-
-	/*for (Wall& wall : data.walls)
-	{
-		if (FindPlayerCollisionWithWall(data.player.position, wall.position))
-		{
-			SetGameOverState(data, game);
-		}
-	}*/
-
 		if (HasPlayerCollisionWithScreenBorder(data.player) || HasPlayerCollisionWithBody(data.player))
 		{
+			data.collisionSound.play();
 			SetGameOverState(data, game);
 		}
 
@@ -230,7 +227,9 @@ namespace SnakeGame
 
 	void SetGameOverState(GameStatePlayingData& data, Game& game)
 	{
-		data.deathSound.play();
+		data.endGameSound.play();
+		data.backgroundSound.stop();
+
 		for (ProfileItem& item : game.recordsTable)
 		{
 			if (item.name == game.profile.name)

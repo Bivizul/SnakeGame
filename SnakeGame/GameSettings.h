@@ -10,14 +10,14 @@ namespace SnakeGame
 	const float WALL_SIZE = 40.f;
 	const float CUP_SIZE = 40.f;
 
-	const float INITIAL_SPEED_VERY_EASY = 0.2f;
-	const float INITIAL_SPEED_EASY = 0.16f;
-	const float INITIAL_SPEED_NORMAL = 0.14f;
-	const float INITIAL_SPEED_HARD = 0.12f;
-	const float INITIAL_SPEED_VERY_HARD = 0.1f;
+	const float INITIAL_SPEED_VERY_EASY = 0.16f;
+	const float INITIAL_SPEED_EASY = 0.14f;
+	const float INITIAL_SPEED_NORMAL = 0.12f;
+	const float INITIAL_SPEED_HARD = 0.1f;
+	const float INITIAL_SPEED_VERY_HARD = 0.08f;
 
 	const int MIN_APPLES = 1;
-	const int MAX_APPLES = 2;
+	const int MAX_APPLES = 3;
 	const int MIN_walls = 5;
 	const int MAX_walls = 20;
 

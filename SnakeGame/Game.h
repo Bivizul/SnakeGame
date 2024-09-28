@@ -3,6 +3,7 @@
 #include "GameSettings.h"
 #include "Player.h"
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 
 namespace SnakeGame
 {
@@ -59,6 +60,11 @@ namespace SnakeGame
 		GameSettings settings = GameSettings::Default;
 		ProfileItem recordsTable[MAX_RECORDS_TABLE_SIZE];
 		ProfileItem profile;
+
+		sf::SoundBuffer keyPressedBuffer;
+		sf::Sound keyPressedSound;
+
+		bool isSoundEnabled;
 	};
 
 

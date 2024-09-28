@@ -116,10 +116,12 @@ namespace SnakeGame
 			{
 				if (data.buttonNav.selectedButton == &data.startGameButton)
 				{
+					game.keyPressedSound.play();
 					SwitchGameState(game, GameStateType::Playing);
 				}
 				else if (data.buttonNav.selectedButton == &data.mainMenuButton)
 				{
+					game.keyPressedSound.play();
 					SwitchGameState(game, GameStateType::MainMenu);
 				}
 				else
@@ -132,11 +134,13 @@ namespace SnakeGame
 			if (orientation == Orientation::Vertical && event.key.code == sf::Keyboard::W ||
 				orientation == Orientation::Horizontal && event.key.code == sf::Keyboard::A)
 			{
+				game.keyPressedSound.play();
 				SelectPreviousButtonNavItem(data.buttonNav);
 			}
 			else if (orientation == Orientation::Vertical && event.key.code == sf::Keyboard::S ||
 				orientation == Orientation::Horizontal && event.key.code == sf::Keyboard::D)
 			{
+				game.keyPressedSound.play();
 				SelectNextButtonNavItem(data.buttonNav);
 			}
 		}

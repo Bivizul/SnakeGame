@@ -57,6 +57,7 @@ namespace SnakeGame
 		{
 			if (event.type == sf::Event::TextEntered)
 			{
+				game.keyPressedSound.play();
 				if (event.text.unicode == 8 && !data.playerName.empty())
 				{
 					data.playerName.pop_back();
@@ -68,6 +69,7 @@ namespace SnakeGame
 			}
 			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Enter)
 			{
+				game.keyPressedSound.play();
 				data.isNeedEnterNamePopupVisible = false;
 				game.profile.name = data.playerName;
 			}
@@ -78,16 +80,19 @@ namespace SnakeGame
 		{
 			if (event.key.code == sf::Keyboard::Escape)
 			{
+				game.keyPressedSound.play();
 				CollapseSelectedItem(data.menu);
 			}
 			else if (event.key.code == sf::Keyboard::Enter)
 			{
 				if (data.menu.selectedItem == &data.noItem)
 				{
+					game.keyPressedSound.play();
 					data.isNeedEnterNamePopupVisible = false;
 				}
 				else if (data.menu.selectedItem == &data.yesItem)
 				{
+					game.keyPressedSound.play();
 					data.isEnteringName = true;
 				}
 			}
@@ -96,11 +101,13 @@ namespace SnakeGame
 			if (orientation == Orientation::Vertical && event.key.code == sf::Keyboard::W ||
 				orientation == Orientation::Horizontal && event.key.code == sf::Keyboard::A)
 			{
+				game.keyPressedSound.play();
 				SelectPreviousMenuItem(data.menu);
 			}
 			else if (orientation == Orientation::Vertical && event.key.code == sf::Keyboard::S ||
 				orientation == Orientation::Horizontal && event.key.code == sf::Keyboard::D)
 			{
+				game.keyPressedSound.play();
 				SelectNextMenuItem(data.menu);
 			}
 		}

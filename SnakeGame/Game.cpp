@@ -5,6 +5,7 @@
 #include "GameStatePlaying.h"
 #include <algorithm>
 #include <assert.h>
+#include <iostream>
 
 namespace SnakeGame
 {
@@ -32,6 +33,15 @@ namespace SnakeGame
 		game.gameStateChangeType = GameStateChangeType::None;
 		game.pendingGameStateType = GameStateType::None;
 		game.pendingGameStateIsExclusivelyVisible = false;
+
+		game.isSoundEnabled = ((std::uint8_t)game.settings & (std::uint8_t)GameSettings::SoundEnabled) != (std::uint8_t)GameSettings::Empty;
+		std::cout << game.isSoundEnabled << std::endl;
+		if (game.isSoundEnabled)
+		{
+			assert(game.keyPressedBuffer.loadFromFile(RESOURCES_PATH + "Owlstorm__Snake_hit.wav"));
+			game.keyPressedSound.setBuffer(game.keyPressedBuffer);
+		}
+
 		SwitchGameState(game, GameStateType::MainMenu);
 	}
 
@@ -84,6 +94,22 @@ namespace SnakeGame
 		game.gameStateChangeType = GameStateChangeType::None;
 		game.pendingGameStateType = GameStateType::None;
 		game.pendingGameStateIsExclusivelyVisible = false;
+
+		/*std::cout << "U " << game.isSoundEnabled << std::endl;*/
+		game.isSoundEnabled = ((std::uint8_t)game.settings & (std::uint8_t)GameSettings::SoundEnabled) != (std::uint8_t)GameSettings::Empty;
+		if (game.isSoundEnabled)
+		{
+			//std::cout << "U " << game.isSoundEnabled << std::endl;
+			//game.keyPressedSound.resetBuffer();
+			if (game.keyPressedSound.getBuffer() == nullptr)
+			{
+				game.keyPressedSound.setBuffer(game.keyPressedBuffer);
+			}
+		}
+		else
+		{
+			game.keyPressedSound.resetBuffer();
+		}
 
 		if (game.gameStateStack.size() > 0)
 		{

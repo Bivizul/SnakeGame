@@ -24,10 +24,20 @@ namespace SnakeGame
 		sf::Texture grassTexture;
 		sf::Sprite grassSprite;
 
-		sf::SoundBuffer appleEatBuffer;
-		sf::SoundBuffer deathBuffer;
-		sf::Sound appleEatSound;
-		sf::Sound deathSound;
+		sf::SoundBuffer startGameSoundBuffer;
+		sf::Sound startGameSound;
+
+		sf::SoundBuffer backgroundSoundBuffer;
+		sf::Sound backgroundSound;
+
+		sf::SoundBuffer collisionSoundBuffer;
+		sf::Sound collisionSound;
+
+		sf::SoundBuffer endGameSoundBuffer;
+		sf::Sound endGameSound;
+
+		bool isMusicEnabled;
+		bool isSoundEnabled;
 
 		Player player;
 		std::vector<Apple> apples;
