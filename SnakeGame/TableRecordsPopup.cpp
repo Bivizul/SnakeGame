@@ -31,6 +31,22 @@ namespace SnakeGame
 
 	}
 
+	void UpdateTableRecordsPopup(TableRecordsPopup& data, Game& game)
+	{
+		for (ProfileItem& item : game.recordsTable)
+		{
+			if (item.name == PROFILE_NAME_DEFAULT)
+			{
+				item.name = game.profile.name;
+				data.recordsText.setString("");
+				for (const ProfileItem& item : game.recordsTable)
+				{
+					data.recordsText.setString(data.recordsText.getString() + "\n" + FormatTableProfile(item.name, item.maxScore));
+				}
+			}
+		}
+	}
+
 	void DrawTableRecordsPopup(TableRecordsPopup& data, float x, float y, sf::RenderWindow& window)
 	{
 		data.popupBackground.setPosition(x, y);
@@ -40,7 +56,6 @@ namespace SnakeGame
 
 		data.titleText.setPosition(viewPosition.x, viewPosition.y - (viewSize.y / 2) + 50);
 		data.recordsText.setPosition(viewPosition.x, viewPosition.y);
-
 
 		window.draw(data.popupBackground);
 		window.draw(data.titleText);

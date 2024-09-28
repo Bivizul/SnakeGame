@@ -21,12 +21,12 @@ namespace SnakeGame
 		game.recordsTable[0] = { "John", 1000000 };
 		game.recordsTable[1] = { "Alice", 200000 };
 		game.recordsTable[2] = { "Bob", 150555 };
-		game.recordsTable[3] = { "Cerfjhn", 120000 };
-		game.recordsTable[4] = { "Awerhw", 98000 };
-		game.recordsTable[5] = { "HBqweg",66899 };
-		game.recordsTable[6] = { "GVe", 57878 };
-		game.recordsTable[7] = { "Brwe", 9663 };
-		game.recordsTable[8] = { "HBWRwhh", 897 };
+		game.recordsTable[3] = { "Sergey", 120000 };
+		game.recordsTable[4] = { "Job", 98000 };
+		game.recordsTable[5] = { "Helena",66899 };
+		game.recordsTable[6] = { "Jack", 57878 };
+		game.recordsTable[7] = { "Olya", 12 };
+		game.recordsTable[8] = { "Fenix", 2 };
 		game.recordsTable[9] = game.profile;
 
 		game.gameStateChangeType = GameStateChangeType::None;

@@ -92,13 +92,6 @@ namespace SnakeGame
 		data.numEatenApples = 0;
 		data.playerScore = 0;
 
-
-		/*data.inputHintText.setFont(data.font);
-		data.inputHintText.setCharacterSize(24);
-		data.inputHintText.setFillColor(sf::Color::White);
-		data.inputHintText.setString("Use arrow keys to move, ESC to exit");
-		data.inputHintText.setOrigin(GetItemOrigin(data.inputHintText, { 0.f, 0.f }));*/
-
 		data.infoBackground.setFillColor(sf::Color(75, 115, 46));
 
 		data.scoreApple.sprite.setTexture(data.appleTexture);

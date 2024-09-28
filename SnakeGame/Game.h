@@ -6,18 +6,6 @@
 
 namespace SnakeGame
 {
-	/*enum class GameOptions : std::uint8_t
-	{
-		VeryEasy = 1 << 0,
-		Easy = 1 << 1,
-		Normal = 1 << 2,
-		Hard = 1 << 3,
-		VeryHard = 1 << 4,
-
-		Default = Normal,
-		Empty = 0
-	};*/
-
 	enum class GameOptions 
 	{
 		VeryEasy = 0,

@@ -17,6 +17,12 @@ namespace SnakeGame
 		Menu menu;
 
 		bool isNeedEnterNamePopupVisible;
+
+		std::string playerName;
+		bool isEnteringName = false;
+
+		sf::Clock caretClock;
+		bool isCaretVisible = true;
 	};
 
 	void InitEnterNamePopup(EnterNamePopup& data, Game& game);

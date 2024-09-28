@@ -15,5 +15,6 @@ namespace SnakeGame
 	};
 
 	void InitTableRecordsPopup(TableRecordsPopup& data, Game& game);
+	void UpdateTableRecordsPopup(TableRecordsPopup& data, Game& game);
 	void DrawTableRecordsPopup(TableRecordsPopup& data, float x, float y, sf::RenderWindow& window);
 }

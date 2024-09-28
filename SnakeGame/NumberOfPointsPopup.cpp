@@ -154,9 +154,6 @@ namespace SnakeGame
 
 	void DrawNumberOfPointsPopup(NumberOfPointsPopup& data, float x, float y, sf::RenderWindow& window)
 	{
-		//data.background.setSize(parentViewSize);
-		//window.draw(data.background);
-
 		data.popupBackground.setPosition(x, y);
 		window.draw(data.popupBackground);
 

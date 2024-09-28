@@ -14,7 +14,8 @@ namespace SnakeGame
 		Left
 	};
 
-	struct SnakeSegment {
+	struct SnakeSegment 
+	{
 		Position position;
 		sf::Sprite sprite;
 		PlayerDirection direction;

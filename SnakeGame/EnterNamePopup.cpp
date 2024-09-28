@@ -53,6 +53,27 @@ namespace SnakeGame
 			return;
 		}
 
+		if (data.isEnteringName)
+		{
+			if (event.type == sf::Event::TextEntered)
+			{
+				if (event.text.unicode == 8 && !data.playerName.empty())
+				{
+					data.playerName.pop_back();
+				}
+				else if (event.text.unicode >= 32 && event.text.unicode <= 126 && data.playerName.length() <= 15)
+				{
+					data.playerName += static_cast<wchar_t>(event.text.unicode);
+				}
+			}
+			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Enter)
+			{
+				data.isNeedEnterNamePopupVisible = false;
+				game.profile.name = data.playerName;
+			}
+			return;
+		}
+
 		if (event.type == sf::Event::KeyPressed)
 		{
 			if (event.key.code == sf::Keyboard::Escape)
@@ -65,9 +86,9 @@ namespace SnakeGame
 				{
 					data.isNeedEnterNamePopupVisible = false;
 				}
-				else if(data.menu.selectedItem == &data.yesItem)
+				else if (data.menu.selectedItem == &data.yesItem)
 				{
-					//CollapseSelectedItem(data.menu);
+					data.isEnteringName = true;
 				}
 			}
 
@@ -87,22 +108,50 @@ namespace SnakeGame
 
 	void UpdateEnterNamePopup(EnterNamePopup& data, Game& game)
 	{
-
+		if (data.isEnteringName) 
+		{
+			if (data.caretClock.getElapsedTime().asMilliseconds() > 500) 
+			{
+				data.isCaretVisible = !data.isCaretVisible;
+				data.caretClock.restart();
+			}
+		}
 	}
 
 	void DrawEnterNamePopup(EnterNamePopup& data, float x, float y, sf::RenderWindow& window)
 	{
-		data.popupBackground.setPosition(x,y);
+		data.popupBackground.setPosition(x, y);
 		window.draw(data.popupBackground);
 
 		sf::Vector2f viewSize = (sf::Vector2f)data.popupBackground.getSize();
 		sf::Vector2f viewPosition = (sf::Vector2f)data.popupBackground.getPosition();
 
-		sf::Text* hintText = &GetCurrentMenuContext(data.menu)->hintText;
-		hintText->setOrigin(GetItemOrigin(*hintText, { 0.5f, 0.f }));
-		hintText->setPosition(viewPosition.x, viewPosition.y - (viewSize.y / 2) + 50);
-		window.draw(*hintText);
+		if (data.isEnteringName) 
+		{
+			sf::Text nameText;
+			nameText.setFont(data.font);
+			nameText.setString(data.playerName);
+			nameText.setCharacterSize(30);
+			nameText.setFillColor(sf::Color::White);
+			nameText.setPosition(viewPosition.x - viewSize.x / 2 + 50, viewPosition.y);
+			window.draw(nameText);
 
-		DrawMenu(data.menu, window, viewPosition, { 0.5f, 0.4f });
+			if (data.isCaretVisible) 
+			{
+				sf::RectangleShape caret(sf::Vector2f(2, nameText.getCharacterSize()));
+				caret.setFillColor(sf::Color::White);
+				caret.setPosition(nameText.getPosition().x + nameText.getGlobalBounds().width, nameText.getPosition().y);
+				window.draw(caret);
+			}
+		}
+		else
+		{
+			sf::Text* hintText = &GetCurrentMenuContext(data.menu)->hintText;
+			hintText->setOrigin(GetItemOrigin(*hintText, { 0.5f, 0.f }));
+			hintText->setPosition(viewPosition.x, viewPosition.y - (viewSize.y / 2) + 50);
+			window.draw(*hintText);
+
+			DrawMenu(data.menu, window, viewPosition, { 0.5f, 0.4f });
+		}
 	}
 }

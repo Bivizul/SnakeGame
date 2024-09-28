@@ -11,15 +11,8 @@ namespace SnakeGame
 		data.enterNamePopup.isNeedEnterNamePopupVisible = game.profile.name == PROFILE_NAME_DEFAULT;
 
 		InitTableRecordsPopup(data.tableRecordsPopup, game);
-
-		/*if (data.enterNamePopup.isNeedEnterNamePopupVisible)
-		{*/
 		InitEnterNamePopup(data.enterNamePopup, game);
-		/*}
-		else
-		{*/
 		InitNumberOfPointsPopup(data.numberOfPointsPopup, game);
-		//}
 	}
 
 	void ShutdownGameStateGameOver(GameStateGameOverData& data, Game& game)
@@ -41,7 +34,9 @@ namespace SnakeGame
 
 	void UpdateGameStateGameOver(GameStateGameOverData& data, Game& game, float timeDelta)
 	{
+		UpdateTableRecordsPopup(data.tableRecordsPopup, game);
 		UpdateNumberOfPointsPopup(data.numberOfPointsPopup, game);
+		UpdateEnterNamePopup(data.enterNamePopup, game);
 	}
 
 	void DrawGameStateGameOver(GameStateGameOverData& data, Game& game, sf::RenderWindow& window)
