@@ -2,8 +2,8 @@
 #include "Apple.h"
 #include "GameSettings.h"
 #include "Player.h"
-#include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
+#include <SFML/Graphics.hpp>
 
 namespace SnakeGame
 {

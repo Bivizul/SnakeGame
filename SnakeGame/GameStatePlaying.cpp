@@ -8,7 +8,6 @@ namespace SnakeGame
 {
 	void InitGameStatePlaying(GameStatePlayingData& data, Game& game)
 	{
-		// Init game resources (terminate if error)
 		assert(data.font.loadFromFile(RESOURCES_PATH + "Fonts/Roboto-Regular.ttf"));
 
 		assert(data.grassTexture.loadFromFile(RESOURCES_PATH + "Grass.jpg"));
@@ -29,7 +28,7 @@ namespace SnakeGame
 		}
 		if (data.isSoundEnabled)
 		{
-			//assert(data.startGameSoundBuffer.loadFromFile(RESOURCES_PATH + "Timgormly__Enter.aiff"));
+			//assert(data.startGameSoundBuffer.loadFromFile(RESOURCES_PATH + "Timgormly__Enter.aiff"));		// нечитаемый формат
 			assert(data.collisionSoundBuffer.loadFromFile(RESOURCES_PATH + "Theevilsocks__menu-hover.wav"));
 			assert(data.endGameSoundBuffer.loadFromFile(RESOURCES_PATH + "Maodin204__Lose.wav"));
 
@@ -88,7 +87,7 @@ namespace SnakeGame
 		}
 
 		data.walls.clear();
-		int numwalls = SCREEN_WIDTH / WALL_SIZE;
+		int numwalls = SCREEN_WIDTH / (int)WALL_SIZE;
 		data.walls.resize(numwalls);
 
 		InitWalls(data.walls, data.wallTexture);
@@ -117,13 +116,6 @@ namespace SnakeGame
 		data.maxScoreText.setFillColor(sf::Color::White);
 		data.maxScoreText.setString(std::to_string(game.profile.maxScore));
 		data.maxScoreText.setOrigin(GetItemOrigin(data.maxScoreText, { 0.5f, 0.5f }));
-
-
-		std::cout << "game.profile.maxScore " << game.profile.maxScore << std::endl;
-		for (ProfileItem& item : game.recordsTable)
-		{
-			std::cout << item.name << " item.maxScore " << item.maxScore << std::endl;
-		}
 
 		data.backgroundSound.play();
 	}
@@ -171,7 +163,7 @@ namespace SnakeGame
 
 		if (FindPlayerCollisionWithApples(data.player.position, data.applesGrid, collidingApples, numCollidingApples))
 		{
-			for (int i = 0; i < numCollidingApples; i++)
+			for (size_t i = 0; i < numCollidingApples; i++)
 			{
 				ResetAppleState(*collidingApples[i], data.player.segmentsPositions);
 				AddAppleToGrid(data.applesGrid, *collidingApples[i]);
@@ -276,7 +268,7 @@ namespace SnakeGame
 		data.currentScoreText.setPosition(data.scoreApple.sprite.getPosition().x + 40.f, data.scoreApple.sprite.getPosition().y);
 		window.draw(data.currentScoreText);
 
-		data.cupSprite.setPosition(OurVectorToSf({ data.currentScoreText.getPosition().x + 100.f, data.currentScoreText.getPosition().y}));
+		data.cupSprite.setPosition(OurVectorToSf({ data.currentScoreText.getPosition().x + 100.f, data.currentScoreText.getPosition().y }));
 		window.draw(data.cupSprite);
 
 		data.maxScoreText.setPosition(data.cupSprite.getPosition().x + 40.f, data.cupSprite.getPosition().y);

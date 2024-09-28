@@ -1,5 +1,5 @@
-#include "Menu.h"
 #include "CheckBox.h"
+#include "Menu.h"
 #include <assert.h>
 
 namespace SnakeGame
@@ -56,7 +56,6 @@ namespace SnakeGame
 				return true;
 			}
 		}
-
 		return false;
 	}
 
@@ -83,7 +82,6 @@ namespace SnakeGame
 			SelectMenuItem(menu, menu.selectedItem->children.front());
 			return true;
 		}
-
 		return false;
 	}
 
@@ -118,5 +116,4 @@ namespace SnakeGame
 
 		DrawItemsList(window, texts, expandedItem->childrenSpacing, expandedItem->childrenOrientation, expandedItem->childrenAlignment, position, origin);
 	}
-
 }

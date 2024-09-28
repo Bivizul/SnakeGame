@@ -1,13 +1,12 @@
+#include "Game.h"
+#include "GameSettings.h"
 #include "TableRecordsPopup.h"
 #include <assert.h>
-#include "GameSettings.h"
-#include "Game.h"
 
 namespace SnakeGame
 {
 	void InitTableRecordsPopup(TableRecordsPopup& data, Game& game)
 	{
-
 		assert(data.font.loadFromFile(RESOURCES_PATH + "Fonts/RobotoMono-Regular.ttf"));
 
 		data.popupBackground.setSize({ 400,650 });

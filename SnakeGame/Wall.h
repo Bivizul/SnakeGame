@@ -8,7 +8,6 @@ namespace SnakeGame
 	{
 		Position position;
 		sf::Sprite sprite;
-		//sf::RectangleShape shape;
 	};
 
 	void InitWall(Wall& wall, const sf::Texture& texture);

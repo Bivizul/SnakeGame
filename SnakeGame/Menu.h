@@ -1,6 +1,6 @@
 #pragma once
-#include "Math.h"
 #include "CheckBox.h"
+#include "Math.h"
 #include "SFML/Graphics.hpp"
 #include <list>
 
@@ -13,7 +13,7 @@ namespace SnakeGame
 		CheckBox checkBox;
 		Orientation childrenOrientation = Orientation::Vertical;
 		Alignment childrenAlignment = Alignment::Min;
-		float childrenSpacing;
+		float childrenSpacing = 0.f;
 
 		sf::Color selectedColor = sf::Color::Green;
 		sf::Color deselectedColor = sf::Color::White;

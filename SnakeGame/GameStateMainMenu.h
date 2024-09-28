@@ -1,7 +1,7 @@
 #pragma once
+#include "CheckBox.h"
 #include "Menu.h"
 #include "SFML/Graphics.hpp"
-#include "CheckBox.h"
 
 namespace SnakeGame
 {

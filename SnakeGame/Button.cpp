@@ -54,7 +54,6 @@ namespace SnakeGame
 				return true;
 			}
 		}
-
 		return false;
 	}
 

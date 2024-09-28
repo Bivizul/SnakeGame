@@ -36,8 +36,8 @@ namespace SnakeGame
 	struct ProfileItem
 	{
 		std::string name;
-		int maxScore = 0;
 		int currentScore = 0;
+		int maxScore = 0;
 	};
 
 	bool operator<(const ProfileItem& lhs, const ProfileItem& rhs);

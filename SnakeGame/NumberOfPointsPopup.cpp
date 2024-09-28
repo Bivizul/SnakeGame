@@ -52,13 +52,11 @@ namespace SnakeGame
 
 		//--------------------------------------------------
 
-		//std::string s = "Stasfasfasrt\ngamesfd";
-		//std::string s = "Начать\nигру";
 		std::string sg = "Start\ngame";
 		std::string mm = "Main\nmenu";
-		//std::wstring s = L"Начать\nигру";
-		//std::wstring s = L"Русский\ngamesfd";
 
+		//std::string s = "Начать\nигру";	// попытки включить русский язык для форматированных кнопок
+		//std::wstring s = L"Начать\nигру";
 		//InitButton(data.startGameButton, data.font, L"Начать\nигру");
 		//InitButton(data.startGameButton, data.font, sg);
 		//InitButton(data.mainMenuButton, data.font, L"В главное\nменю");
@@ -107,12 +105,7 @@ namespace SnakeGame
 
 		if (event.type == sf::Event::KeyPressed)
 		{
-
-			if (event.key.code == sf::Keyboard::Escape)
-			{
-				//	TODO
-			}
-			else if (event.key.code == sf::Keyboard::Enter)
+			if (event.key.code == sf::Keyboard::Enter)
 			{
 				if (data.buttonNav.selectedButton == &data.startGameButton)
 				{
@@ -126,7 +119,7 @@ namespace SnakeGame
 				}
 				else
 				{
-					//	TODO
+					//	nothing
 				}
 			}
 

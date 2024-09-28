@@ -42,12 +42,8 @@ namespace SnakeGame
 
 	void InitPlayer(Player& player, const sf::Texture& texture);
 	void UpdatePlayer(Player& player, const float timeDelta);
-
 	void Grow(Player& player, const sf::Texture& bodyTexture);
-
 	bool HasPlayerCollisionWithScreenBorder(const Player& player);
-
 	bool HasPlayerCollisionWithBody(const Player& player);
-
 	void DrawPlayer(Player& player, sf::RenderWindow& window);
 }

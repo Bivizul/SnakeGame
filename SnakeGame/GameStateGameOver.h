@@ -1,8 +1,8 @@
 #pragma once
-#include "SFML/Graphics.hpp"
-#include "TableRecordsPopup.h"
 #include "EnterNamePopup.h"
 #include "NumberOfPointsPopup.h"
+#include "SFML/Graphics.hpp"
+#include "TableRecordsPopup.h"
 
 namespace SnakeGame
 {

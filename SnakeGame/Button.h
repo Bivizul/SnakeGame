@@ -1,6 +1,6 @@
 #pragma once
-#include "SFML/Graphics.hpp"
 #include "Math.h"
+#include "SFML/Graphics.hpp"
 
 namespace SnakeGame
 {

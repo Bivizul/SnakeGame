@@ -62,9 +62,9 @@ namespace SnakeGame
 				{
 					data.playerName.pop_back();
 				}
-				else if (event.text.unicode >= 32 && event.text.unicode <= 126 && data.playerName.length() <= 15)
+				else if (event.text.unicode >= 32 && event.text.unicode < 128 && data.playerName.length() <= 15)
 				{
-					data.playerName += static_cast<wchar_t>(event.text.unicode);
+					data.playerName += static_cast<char>(event.text.unicode);
 				}
 			}
 			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Enter)
@@ -115,9 +115,9 @@ namespace SnakeGame
 
 	void UpdateEnterNamePopup(EnterNamePopup& data, Game& game)
 	{
-		if (data.isEnteringName) 
+		if (data.isEnteringName)
 		{
-			if (data.caretClock.getElapsedTime().asMilliseconds() > 500) 
+			if (data.caretClock.getElapsedTime().asMilliseconds() > 500)
 			{
 				data.isCaretVisible = !data.isCaretVisible;
 				data.caretClock.restart();
@@ -130,10 +130,10 @@ namespace SnakeGame
 		data.popupBackground.setPosition(x, y);
 		window.draw(data.popupBackground);
 
-		sf::Vector2f viewSize = (sf::Vector2f)data.popupBackground.getSize();
+		sf::Vector2f viewSize(static_cast<float>(data.popupBackground.getSize().x), static_cast<float>(data.popupBackground.getSize().y));
 		sf::Vector2f viewPosition = (sf::Vector2f)data.popupBackground.getPosition();
 
-		if (data.isEnteringName) 
+		if (data.isEnteringName)
 		{
 			sf::Text nameText;
 			nameText.setFont(data.font);
@@ -143,9 +143,9 @@ namespace SnakeGame
 			nameText.setPosition(viewPosition.x - viewSize.x / 2 + 50, viewPosition.y);
 			window.draw(nameText);
 
-			if (data.isCaretVisible) 
+			if (data.isCaretVisible)
 			{
-				sf::RectangleShape caret(sf::Vector2f(2, nameText.getCharacterSize()));
+				sf::RectangleShape caret(sf::Vector2f(2.f, (float)nameText.getCharacterSize()));
 				caret.setFillColor(sf::Color::White);
 				caret.setPosition(nameText.getPosition().x + nameText.getGlobalBounds().width, nameText.getPosition().y);
 				window.draw(caret);

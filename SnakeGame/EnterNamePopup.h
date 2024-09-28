@@ -16,7 +16,7 @@ namespace SnakeGame
 		MenuItem yesItem;
 		Menu menu;
 
-		bool isNeedEnterNamePopupVisible;
+		bool isNeedEnterNamePopupVisible = true;
 
 		std::string playerName;
 		bool isEnteringName = false;

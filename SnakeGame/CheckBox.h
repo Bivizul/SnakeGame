@@ -1,13 +1,12 @@
 #pragma once
-#include <SFML/Graphics.hpp>
 #include "Math.h"
+#include <SFML/Graphics.hpp>
 
 namespace SnakeGame
 {
 	struct CheckBox
 	{
 		sf::RectangleShape box;
-		sf::Text checkMark;
 		sf::Text label;
 		Position position;
 		bool isChecked;

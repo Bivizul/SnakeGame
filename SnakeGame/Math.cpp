@@ -1,8 +1,8 @@
 #include "Math.h"
-#include <sstream>
 #include <iomanip> // для std::setw и std::setfill
-#include <vector>
 #include <iostream>
+#include <sstream>
+#include <vector>
 
 namespace SnakeGame
 {
@@ -134,45 +134,51 @@ namespace SnakeGame
 		return oss.str();
 	}
 
-	std::string FormatLine(std::string name, int score, int maxLineWidth) {
+	std::string FormatLine(std::string name, int score, int maxLineWidth)
+	{
 		std::ostringstream oss;
 		oss << name;
 		std::string formattedValue = FormatNumber(score);
-		int numLength = oss.str().length();
-		int spaceForNumber = maxLineWidth - numLength - formattedValue.length();
+		size_t numLength = oss.str().length();
+		size_t spaceForNumber = maxLineWidth - numLength - formattedValue.length();
 		oss << std::string(spaceForNumber, ' ') << formattedValue;
 		return oss.str();
 	}
 
-	std::string FormatLine(int number, int score, int maxLineWidth) {
+	std::string FormatLine(int number, int score, int maxLineWidth)
+	{
 		std::ostringstream oss;
 		oss << number << ". ";
 		std::string formattedValue = FormatNumber(score);
-		int numLength = oss.str().length();
-		int spaceForNumber = maxLineWidth - numLength - formattedValue.length();
+		size_t numLength = oss.str().length();
+		size_t spaceForNumber = maxLineWidth - numLength - formattedValue.length();
 		oss << std::string(spaceForNumber, ' ') << formattedValue;
 		return oss.str();
 	}
 
-	std::string FormatNumber(int value) {
+	std::string FormatNumber(int value)
+	{
 		std::ostringstream oss;
 		std::string number = std::to_string(value);
-		int len = number.length();
-		for (int i = 0; i < len; ++i) {
+		size_t len = number.length();
+		for (size_t i = 0; i < len; ++i)
+		{
 			oss << number[i];
-			if ((len - i - 1) % 3 == 0 && i != len - 1) {
+			if ((len - i - 1) % 3 == 0 && i != len - 1)
+			{
 				oss << ' ';
 			}
 		}
 		return oss.str();
 	}
 
-	std::vector<std::string> SplitString(const std::string& str, char delimiter) 
+	std::vector<std::string> SplitString(const std::string& str, char delimiter)
 	{
 		std::vector<std::string> lines;
 		std::string line;
 		std::istringstream stream(str);
-		while (std::getline(stream, line, delimiter)) {
+		while (std::getline(stream, line, delimiter))
+		{
 			lines.push_back(line);
 		}
 		return lines;
@@ -184,21 +190,24 @@ namespace SnakeGame
 		float windowWidth = text.getPosition().x * 2;
 		float yPosition = text.getPosition().y;
 
-		for (const auto& line : lines) {
+		for (const auto& line : lines)
+		{
 			sf::Text tempText = text;
 			tempText.setString(line);
 			sf::FloatRect bounds = tempText.getLocalBounds();
-			float centeredX = (windowWidth - bounds.width) /2;
+			float centeredX = (windowWidth - bounds.width) / 2;
 			tempText.setPosition(centeredX, yPosition);
 			window.draw(tempText);
 			yPosition += bounds.height + 10;
 		}
 	}
 
-	std::string ReplaceNewlines(const std::string& input) {
+	std::string ReplaceNewlines(const std::string& input)
+	{
 		std::string result = input;
 		size_t pos = 0;
-		while ((pos = result.find('\n', pos)) != std::string::npos) {
+		while ((pos = result.find('\n', pos)) != std::string::npos)
+		{
 			result.replace(pos, 1, "[NEWLINE]");
 			pos += 9;
 		}
@@ -206,9 +215,12 @@ namespace SnakeGame
 	}
 
 
-	bool IsPositionProhibited(float x, float y, const std::vector<Position>& prohibitedPositions) {
-		for (const auto& pos : prohibitedPositions) {
-			if (std::abs(x - pos.x) <= 40.f && std::abs(y - pos.y) <= 40.f) {
+	bool IsPositionProhibited(float x, float y, const std::vector<Position>& prohibitedPositions)
+	{
+		for (const auto& pos : prohibitedPositions)
+		{
+			if (std::abs(x - pos.x) <= 40.f && std::abs(y - pos.y) <= 40.f)
+			{
 				return true;
 			}
 		}

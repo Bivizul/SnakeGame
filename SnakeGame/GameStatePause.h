@@ -12,8 +12,8 @@ namespace SnakeGame
 		sf::RectangleShape background;
 		sf::Text hintText;
 
-		float pauseTimeLeft;
-		bool countdownStarted;
+		float pauseTimeLeft = 0.f;
+		bool countdownStarted = false;
 	};
 
 	void InitGameStateExitDialog(GameStateExitDialogData& data, Game& game);

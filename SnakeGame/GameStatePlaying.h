@@ -1,8 +1,8 @@
 #pragma once
 #include "Apple.h"
 #include "Player.h"
-#include "Wall.h"
 #include "SFML/Graphics.hpp"
+#include "Wall.h"
 #include <SFML/Audio.hpp>
 
 namespace SnakeGame
@@ -36,8 +36,8 @@ namespace SnakeGame
 		sf::SoundBuffer endGameSoundBuffer;
 		sf::Sound endGameSound;
 
-		bool isMusicEnabled;
-		bool isSoundEnabled;
+		bool isMusicEnabled = true;
+		bool isSoundEnabled = true;
 
 		Player player;
 		std::vector<Apple> apples;

@@ -1,6 +1,6 @@
-﻿#include <SFML/Graphics.hpp>
+﻿#include "CheckBox.h"
 #include <iostream>
-#include "CheckBox.h"
+#include <SFML/Graphics.hpp>
 
 namespace SnakeGame
 {
@@ -10,24 +10,14 @@ namespace SnakeGame
 		checkBox.box.setFillColor(sf::Color::Black);
 		checkBox.box.setOutlineThickness(2);
 		checkBox.box.setOutlineColor(sf::Color::White);
-
-		checkBox.checkMark.setFont(font);
-		//checkBox.checkMark.setString(L"✔");
-		checkBox.checkMark.setString("V");
-		checkBox.checkMark.setCharacterSize(size);
-		checkBox.checkMark.setFillColor(sf::Color::White);
 	}
 
 	void DrawCheckBox(CheckBox& checkBox, sf::RenderWindow& window)
 	{
 		int size = 30;
 		checkBox.box.setPosition(checkBox.position.x, checkBox.position.y);
-		checkBox.checkMark.setPosition(checkBox.position.x, checkBox.position.y - 0.1f * size);
 
 		window.draw(checkBox.box);
-		if (checkBox.isChecked) {
-			window.draw(checkBox.checkMark);
-		}
 	}
 
 	void UpdateCheckBoxPosition(CheckBox& checkBox, const sf::Text& menuItemText)
