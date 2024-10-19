@@ -15,19 +15,38 @@ namespace SnakeGame
 
 	void InitGame(Game& game)
 	{
-		game.profile = { PROFILE_NAME_DEFAULT, 0 , 0 };
 
-		// Generate fake records table
-		game.recordsTable[0] = { "John", 1000000 };
-		game.recordsTable[1] = { "Alice", 200000 };
-		game.recordsTable[2] = { "Bob", 150555 };
-		game.recordsTable[3] = { "Sergey", 120000 };
-		game.recordsTable[4] = { "Job", 98000 };
-		game.recordsTable[5] = { "Helena",66899 };
-		game.recordsTable[6] = { "Jack", 57878 };
-		game.recordsTable[7] = { "Olya", 12 };
-		game.recordsTable[8] = { "Fenix", 2 };
-		game.recordsTable[9] = game.profile;
+		game.recordsTable = LoadProfilesFromFile(TABLE_RECORDS_NAME_FILE);
+
+		if (game.recordsTable.empty())
+		{
+			game.profile = { PROFILE_NAME_DEFAULT, 0 , 0 ,true };
+
+			game.recordsTable.reserve(MAX_RECORDS_TABLE_SIZE);
+			// Generate fake records table
+			game.recordsTable.push_back({ "John", 0, 1000000 });
+			game.recordsTable.push_back({ "Alice", 0, 200000 });
+			game.recordsTable.push_back({ "Bob", 0, 150555 });
+			game.recordsTable.push_back({ "Sergey", 0, 120000 });
+			game.recordsTable.push_back({ "Job", 0, 98000 });
+			game.recordsTable.push_back({ "Helena", 0, 66899 });
+			game.recordsTable.push_back({ "Jack", 0, 57878 });
+			game.recordsTable.push_back({ "Olya", 0, 12 });
+			game.recordsTable.push_back({ "Fenix", 0, 2 });
+			game.recordsTable.push_back(game.profile);
+
+			SaveProfilesToFile(TABLE_RECORDS_NAME_FILE, game.recordsTable);
+		}
+		else
+		{
+			for (ProfileItem item: game.recordsTable)
+			{
+				if (item.isUser)
+				{
+					game.profile = item;
+				}
+			}
+		}
 
 		game.gameStateChangeType = GameStateChangeType::None;
 		game.pendingGameStateType = GameStateType::None;

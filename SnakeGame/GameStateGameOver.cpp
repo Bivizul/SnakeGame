@@ -37,21 +37,24 @@ namespace SnakeGame
 		UpdateTableRecordsPopup(data.tableRecordsPopup, game);
 		UpdateNumberOfPointsPopup(data.numberOfPointsPopup, game);
 		UpdateEnterNamePopup(data.enterNamePopup, game);
+
+		std::sort(std::begin(game.recordsTable), std::end(game.recordsTable));
+		SaveProfilesToFile(TABLE_RECORDS_NAME_FILE, game.recordsTable);
 	}
 
 	void DrawGameStateGameOver(GameStateGameOverData& data, Game& game, sf::RenderWindow& window)
 	{
 		sf::Vector2f parentViewSize = (sf::Vector2f)window.getSize();
 
-		DrawTableRecordsPopup(data.tableRecordsPopup, parentViewSize.x / 4.f * 1.4f, parentViewSize.y / 2.f, window);
+		DrawTableRecordsPopup(data.tableRecordsPopup, parentViewSize.x / 4.f * 1.2f, parentViewSize.y / 2.f, window);
 
 		if (data.enterNamePopup.isNeedEnterNamePopupVisible)
 		{
-			DrawEnterNamePopup(data.enterNamePopup, parentViewSize.x / 4.f * 2.6f, parentViewSize.y / 2.f, window);
+			DrawEnterNamePopup(data.enterNamePopup, parentViewSize.x / 4.f * 2.8f, parentViewSize.y / 2.f, window);
 		}
 		else
 		{
-			DrawNumberOfPointsPopup(data.numberOfPointsPopup, parentViewSize.x / 4.f * 2.6f, parentViewSize.y / 2.f, window);
+			DrawNumberOfPointsPopup(data.numberOfPointsPopup, parentViewSize.x / 4.f * 2.8f, parentViewSize.y / 2.f, window);
 		}
 	}
 }

@@ -58,7 +58,7 @@ namespace SnakeGame
 
 		GameOptions options = GameOptions::VeryEasy;
 		GameSettings settings = GameSettings::Default;
-		ProfileItem recordsTable[MAX_RECORDS_TABLE_SIZE];
+		std::vector <ProfileItem> recordsTable;
 		ProfileItem profile;
 
 		sf::SoundBuffer keyPressedBuffer;

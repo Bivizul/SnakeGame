@@ -118,6 +118,8 @@ namespace SnakeGame
 		data.maxScoreText.setOrigin(GetItemOrigin(data.maxScoreText, { 0.5f, 0.5f }));
 
 		data.backgroundSound.play();
+
+		Grow(data.player, data.snakeBodyTexture);
 	}
 
 	void ShutdownGameStatePlaying(GameStatePlayingData& data, Game& game)
@@ -139,19 +141,19 @@ namespace SnakeGame
 
 	void UpdateGameStatePlaying(GameStatePlayingData& data, Game& game, float timeDelta)
 	{
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && data.player.direction != PlayerDirection::Down)
 		{
 			data.player.direction = PlayerDirection::Up;
 		}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) && data.player.direction != PlayerDirection::Left)
 		{
 			data.player.direction = PlayerDirection::Right;
 		}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && data.player.direction != PlayerDirection::Up)
 		{
 			data.player.direction = PlayerDirection::Down;
 		}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) && data.player.direction != PlayerDirection::Right)
 		{
 			data.player.direction = PlayerDirection::Left;
 		}
@@ -163,7 +165,7 @@ namespace SnakeGame
 
 		if (FindPlayerCollisionWithApples(data.player.position, data.applesGrid, collidingApples, numCollidingApples))
 		{
-			for (size_t i = 0; i < numCollidingApples; i++)
+			for (size_t i = 0; i < numCollidingApples && i < MAX_APPLES_IN_CELL; i++)
 			{
 				ResetAppleState(*collidingApples[i], data.player.segmentsPositions);
 				AddAppleToGrid(data.applesGrid, *collidingApples[i]);
@@ -236,8 +238,6 @@ namespace SnakeGame
 				break;
 			}
 		}
-
-		std::sort(std::begin(game.recordsTable), std::end(game.recordsTable));
 
 		PushGameState(game, GameStateType::GameOver, false);
 	}

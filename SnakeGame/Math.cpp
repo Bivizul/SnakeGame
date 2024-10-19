@@ -1,4 +1,5 @@
 #include "Math.h"
+#include <fstream>
 #include <iomanip> // для std::setw и std::setfill
 #include <iostream>
 #include <sstream>
@@ -225,5 +226,53 @@ namespace SnakeGame
 			}
 		}
 		return false;
+	}
+
+	void SaveProfilesToFile(const std::string& filename, const std::vector<ProfileItem>& profiles)
+	{
+		std::ofstream outFile(filename);
+
+		if (outFile.is_open())
+		{
+			for (const auto& profile : profiles)
+			{
+				outFile << profile.name << " "
+					<< profile.currentScore << " "
+					<< profile.maxScore << " "
+					<< profile.isUser << std::endl;
+			}
+			outFile.close();
+		}
+		else
+		{
+			std::cout << "Не удалось открыть файл для записи." << std::endl;
+		}
+	}
+
+	std::vector<ProfileItem> LoadProfilesFromFile(const std::string& filename)
+	{
+		std::vector<ProfileItem> profiles;
+		std::ifstream inFile(filename);
+
+		if (inFile.is_open())
+		{
+			std::string line;
+			while (std::getline(inFile, line))
+			{
+				std::istringstream iss(line);
+				ProfileItem profile;
+
+				iss >> profile.name >> profile.currentScore >> profile.maxScore >> profile.isUser;
+
+				profiles.push_back(profile);
+			}
+			inFile.close();
+		}
+		else
+		{
+			std::cout << "Файл отсутствует или не удалось его открыть." << std::endl;
+		}
+
+		return profiles;
 	}
 }

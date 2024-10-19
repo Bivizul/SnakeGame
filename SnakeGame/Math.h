@@ -38,6 +38,7 @@ namespace SnakeGame
 		std::string name;
 		int currentScore = 0;
 		int maxScore = 0;
+		bool isUser = false;
 	};
 
 	bool operator<(const ProfileItem& lhs, const ProfileItem& rhs);
@@ -55,4 +56,7 @@ namespace SnakeGame
 	void CenterText(sf::Text& text, sf::RenderWindow& window);
 	std::string ReplaceNewlines(const std::string& input);
 	bool IsPositionProhibited(float x, float y, const std::vector<Position>& prohibitedPositions);
+	void SaveProfilesToFile(const std::string& filename, const std::vector<ProfileItem>& profiles);
+	std::vector<ProfileItem> LoadProfilesFromFile(const std::string& filename);
+	
 }

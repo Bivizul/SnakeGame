@@ -21,9 +21,9 @@ namespace SnakeGame
 	const int MIN_walls = 5;
 	const int MAX_walls = 20;
 
-	const unsigned int SCREEN_WIDTH = 1600;
-	const unsigned int SCREEN_HEIGHT = 1200;
-	const unsigned int INFO_HEIGHT = 80;
+	const unsigned int SCREEN_WIDTH = 1280;
+	const unsigned int SCREEN_HEIGHT = 720;
+	const unsigned int INFO_HEIGHT = 80;    
 
 	const unsigned int PLAYING_FIELD_WIDTH = unsigned(SCREEN_WIDTH - (WALL_SIZE * 2));
 	const unsigned int PLAYING_FIELD_HEIGHT = unsigned(SCREEN_HEIGHT - (WALL_SIZE * 2) - INFO_HEIGHT);
@@ -35,4 +35,6 @@ namespace SnakeGame
 	const int MAX_RECORDS_TABLE_SIZE = 10;
 
 	const std::string PROFILE_NAME_DEFAULT = "XYZ";
+
+	const std::string TABLE_RECORDS_NAME_FILE = "TableRecords.txt";
 }
